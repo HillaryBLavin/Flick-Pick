@@ -9,7 +9,7 @@
 * Anthony Espinosa
 
 ### Project Description
-*This web-based application will help indecisive users narrow down the endless viewing choices availble on popular streaming platforms such as Netflix, Hulu. Amazon Prime, and more!*
+*This web-based application will help indecisive users narrow down the endless viewing choices availble on popular streaming platforms such as Netflix, Hulu, Amazon Prime, and more!*
 
 ### Preliminary Sketch of Final Product
 ![Page 1](/images.first_page.png)
