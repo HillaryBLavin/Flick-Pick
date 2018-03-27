@@ -15,7 +15,7 @@
 ![Page 1](/images/first_page.png)
 ![Page 2](/images/page_2.png)
 ![Page 3](/images/page_3.png)
-![Page 4](/image/page_4.png)
+![Page 4](/images/page_4.png)
 
 
 ### APIs to be Used
