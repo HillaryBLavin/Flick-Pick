@@ -43,3 +43,6 @@ h2 {
     margin: 40px;
     padding: 20px;
 }
+.contentDiv {
+    border: 2px #000 solid;
+}
