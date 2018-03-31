@@ -11,6 +11,7 @@ body {
 }
 .row {
     margin-top: -10px !important;
+
 }
 h1 {
     color: #fff;
@@ -36,4 +37,10 @@ h2 {
     height: 600px;
     margin-top: -10px;
     background-size:cover;
+}
+.innerTV {
+    position: relative;
+    margin: 40px;
+    padding: 20px;
+    border: 2px black solid;
 }
