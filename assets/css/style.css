@@ -1,0 +1,30 @@
+body {
+    background-color: #ccc;
+}
+.header {
+    background-color: #000;
+    width: 100%;
+    height: 150px;
+    margin: 0px auto;
+    padding: 10px;
+
+}
+
+h1 {
+    color: #fff;
+    font-size: 100px;
+    margin: 10px;
+}
+
+h2 {
+    font-size: 1.56rem;
+    line-height: 94%;
+    margin: -1.626667rem 0 1.424rem 0;
+    color: #556491;
+}
+.material-icons {
+    font-size: 80px;
+}
+.col {
+    margin: 10px;
+}
