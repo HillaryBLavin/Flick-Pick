@@ -10,6 +10,8 @@ var userQuestions =
         options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV movie", "Thriller", "War", "Western", "Kids", "News", "Reality", "Sci-Fi $ Fantasy", "Soap"]}
     ],
 
+    currentQuestion,
+    userSelect;
 
     searchAPILKey = "api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
@@ -54,6 +56,22 @@ $.ajax({
     console.log(response);
 });
 
+// Start Button Coding
+$('#startBtn').on('click', function(){
+    // When start button is clicked, the button is also hidden, and ...
+    $(this).hide();
+    // Start App function begins
+	startApp();
+});
+
+// New  Function
+function startApp(){
+
+    // Clears prior elements
+	$('#finalMessage').empty();
+
+    // Loads New Question
+	newQuestion();}
 
 
 //Database target variables for movies
