@@ -1,10 +1,21 @@
-//Movie Database API Key and Query URL's
-
 var searchAPILKey = "api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
-    searchMovies = 'https://api.themoviedb.org/3/search/movie?' + searchAPILKey + '&query=' + tvSearch,
+    language = '&language=en-US', //string term to set english language movies
+    sort = '&sort_by=popularity.asc', //string term set sort option
+    certContry = '&certification_country=US',
+    cert = '&certification='
+    rating = 'PG-13'
+    video = '&include_video=false', 
+    movieQuery = [],
+    tvQuery = [],
+    searchMovies = 'https://api.themoviedb.org/3/discover/movie?' + searchAPILKey + language + sort + certContry + cert + rating + '&include_adult=false&include_video=false&page=1' // Movies
+    queryMovie = 'https://api.themoviedb.org/3/search/movie?' + searchAPILKey + language + '&query=' + movieQuery + '&page=1',
+    tvQuery = 'https://api.themoviedb.org/3/search/tv?' + searchAPILKey + language + '&query=' + movieQuery + '&page=1',
+    searchLatestMovies = 'https://api.themoviedb.org/3/movie/latest?' + searchAPILKey + language,
     searchTVShows = 'https://api.themoviedb.org/3/search/tv?' + searchAPILKey + '&query=' + movieSearch,
-    queryURL = searchMovies;
-
+    searchMovieRatings = 'https://api.themoviedb.org/3/certification/movie/list?' + searchAPILKey
+    searchTVRatings = 'https://api.themoviedb.org/3/certification/tv/list?' + searchAPILKey
+    queryURL = 'https://api.themoviedb.org/3/search/keyword?api_key=2429acb131d788573608b3142e21e670&query=aliens&page=1'
+    
 
 //AJAX Query Call
 
@@ -16,10 +27,42 @@ $.ajax({
 });
 
 
-// Search Term Query Variables 
 
-var tvSearch = ['super'],
-movieSearch = ['aliens'],
+//Database target variables for movies
+    //page  .page
+    //adult  .results["0"].adult
+    // genre  .results["0"].genre_ids["0"]
+    // title  .results["0"].title
+    //overview  .results[0].overview
+    //poster .results["0"].poster_path
+    //certification: .certifications.US["0"].certification
+    //certification meaning: .certifications.US["0"].meaning
+
+
+//Database target variables for TV
+    //page  .page
+    // genre  .results["0"].genre_ids["0"]
+    //name  .results["0"].name
+    //overview  .results[0].overview
+    //poster .results["0"].poster_path
+    //certification: .certifications.US["0"].certification
+    //certification meaning: .certifications.US["0"].meaning
+
+
+// # of pages and results in the database
+    // total_pages: 17687 movies / 3643 TV
+    //total_results: 353728 movies /72850 TV
+
+//We can Query Multiple Genre ID
+    /*"genre_ids": [
+        28,
+        53,
+        12,
+        878
+    ],*/
+
+
+    
 
 
 // Initialize Firebase
