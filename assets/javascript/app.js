@@ -3,11 +3,11 @@
 var userQuestions = 
     [
         {question: "Do you want to watch a TV Show or a Movie?",
-        multipleChoice: ["Television", "Movie"]},
+        options: ["Television", "Movie"]},
         {question: "What is the rating you want?",
-        multipleChoice: ["Choice", "Something", "Um", "I don't know"]},
+        options: ["Choice", "Something", "Um", "I don't know"]},
         {question: "What Genre are you looking for?",
-        multipleChoice: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV movie", "Thriller", "War", "Western", "Kids", "News", "Reality", "Sci-Fi $ Fantasy", "Soap"]}
+        options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV movie", "Thriller", "War", "Western", "Kids", "News", "Reality", "Sci-Fi $ Fantasy", "Soap"]}
     ],
 
 
