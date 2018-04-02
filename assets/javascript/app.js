@@ -1,4 +1,17 @@
-var searchAPILKey = "api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
+// Object for Questions and User Options
+
+var userQuestions = 
+    [
+        {question: "Do you want to watch a TV Show or a Movie?",
+        options: ["Television", "Movie"]},
+        {question: "What is the rating you want?",
+        options: ["Choice", "Something", "Um", "I don't know"]},
+        {question: "What Genre are you looking for?",
+        options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV movie", "Thriller", "War", "Western", "Kids", "News", "Reality", "Sci-Fi $ Fantasy", "Soap"]}
+    ],
+
+
+    searchAPILKey = "api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
     sort = '&sort_by=popularity.asc', //string term set sort option
     certContry = '&certification_country=US',
@@ -7,6 +20,8 @@ var searchAPILKey = "api_key=2429acb131d788573608b3142e21e670", //key provided b
     video = '&include_video=false',
     movieQuery = [],
     tvQuery = [],
+
+    
 
     //Query by latest movie or TV 
     searchMovies = 'https://api.themoviedb.org/3/discover/movie?' + searchAPILKey + language + sort + certContry + cert + rating + '&include_adult=false&include_video=false&page=1', // Movies
@@ -25,6 +40,9 @@ var searchAPILKey = "api_key=2429acb131d788573608b3142e21e670", //key provided b
     searchTVRatings = 'https://api.themoviedb.org/3/certification/tv/list?' + searchAPILKey,
 
     queryURL = 'https://api.themoviedb.org/3/search/keyword?api_key=2429acb131d788573608b3142e21e670&query=aliens&page=1'
+
+
+
 
 
 //AJAX Query Call
