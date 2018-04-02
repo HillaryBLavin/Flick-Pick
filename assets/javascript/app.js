@@ -65,12 +65,8 @@ $('#startBtn').on('click', function(){
 // New  Function
 function startApp(){
 
-    // Clears prior elements
-	$('#finalMessage').empty();
-
     // Loads New Question
 	newQuestion();}
-
 
     // Selects New Question
 function newQuestion(){
@@ -79,20 +75,16 @@ function newQuestion(){
 	//sets up new questions & answerList
 	$('#currentQuestion').html('<h2>#' + (currentQuestion+1) + '</h2>');
 	$('#question').html('<h3>' + userQuestions[currentQuestion].question + '</h3>');
-	for(var i = 0; i < 4; i++){
+    for(var i = 0; i < userQuestions.options.length; i++){
 		var choices = $('<div>');
 		choices.text(userQuestions[currentQuestion].options[i]);
 		choices.attr({'data-index': i });
 		choices.addClass('thisChoice');
     }
     
-    	//clicking an answer will pause the time and setup answerPage
-	$('.thisChoice').on('click',function(){
-		userSelect = $(this).data('index');
-    
+    	
         // Maybe include some code here to save the choice in the database?
-	});
-
+	};
 }
 // 2. Store User's choices in Firebase
 $("#").on("click", function () {
