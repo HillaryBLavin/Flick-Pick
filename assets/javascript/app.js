@@ -10,6 +10,8 @@ var userQuestions =
         options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV movie", "Thriller", "War", "Western", "Kids", "News", "Reality", "Sci-Fi $ Fantasy", "Soap"]}
     ],
 
+    currentQuestion,
+    userSelect;
 
     searchAPILKey = "api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
@@ -54,6 +56,43 @@ $.ajax({
     console.log(response);
 });
 
+// Start Button Coding
+$('#startBtn').on('click', function(){
+    // When start button is clicked, the button is also hidden, and ...
+    $(this).hide();
+    // Start App function begins
+	startApp();
+});
+
+// New  Function
+function startApp(){
+
+    // Clears prior elements
+	$('#finalMessage').empty();
+
+    // Loads New Question
+	newQuestion();}
+
+    // Selects New Question
+function newQuestion(){
+	answered = true;
+	
+	//sets up new questions & answerList
+	$('#currentQuestion').html('<h2>#' + (currentQuestion+1) + '</h2>');
+	$('#question').html('<h3>' + userQuestions[currentQuestion].question + '</h3>');
+	for(var i = 0; i < 4; i++){
+		var choices = $('<div>');
+		choices.text(userQuestions[currentQuestion].options[i]);
+		choices.attr({'data-index': i });
+		choices.addClass('thisChoice');
+    }
+    
+    	//clicking an answer will pause the time and setup answerPage
+	$('.thisChoice').on('click',function(){
+		userSelect = $(this).data('index');
+    
+        // Maybe include some code here to save the choice in the database?
+	});
 
 
 //Database target variables for movies
