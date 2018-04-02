@@ -95,7 +95,7 @@ function newQuestion(){
         // Maybe include some code here to save the choice in the database?
 	});
 
-
+}
 
 //Database target variables for movies
 //page  .page
