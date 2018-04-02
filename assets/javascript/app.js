@@ -56,6 +56,22 @@ $.ajax({
     console.log(response);
 });
 
+// Start Button Coding
+$('#startBtn').on('click', function(){
+    // When start button is clicked, the button is also hidden, and ...
+    $(this).hide();
+    // Start App function begins
+	startApp();
+});
+
+// New  Function
+function startApp(){
+
+    // Clears prior elements
+	$('#finalMessage').empty();
+
+    // Loads New Question
+	newQuestion();}
 
 
 //Database target variables for movies
