@@ -1,3 +1,6 @@
+
+var searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
+
 // Object for Questions and User Options
 
 var userQuestions = 
@@ -18,44 +21,40 @@ var userQuestions =
     sort = '&sort_by=popularity.asc', //string term set sort option
     certContry = '&certification_country=US',
     cert = '&certification=',
-    rating = 'PG-13',
-    video = '&include_video=false',
-    movieQuery = [],
-    tvQuery = [],
 
+    video = '&include_video=false',
+
+
+    // Sets Initial variables for the database
     
 
     //Query by latest movie or TV 
     searchMovies = 'https://api.themoviedb.org/3/discover/movie?' + searchAPILKey + language + sort + certContry + cert + rating + '&include_adult=false&include_video=false&page=1', // Movies
     searchTV = 'https://api.themoviedb.org/3/discover/tv?' + searchAPILKey + language + sort + certContry + cert + rating + '&include_adult=false&include_video=false&page=1', //TV
-
-    //Query by movie or TV search query
-    queryMovie = 'https://api.themoviedb.org/3/search/movie?' + searchAPILKey + language + '&query=' + movieQuery + '&page=1',
-    queryTV = 'https://api.themoviedb.org/3/search/tv?' + searchAPILKey + language + '&query=' + tvQuery + '&page=1',
-
-    //Query by latest movie or TV 
-    searchLatestMovies = 'https://api.themoviedb.org/3/movie/latest?' + searchAPILKey + language,
-    searchTVShows = 'https://api.themoviedb.org/3/tv/latest?' + searchAPILKey + language,
-
-    //Ratings Search
-    searchMovieRatings = 'https://api.themoviedb.org/3/certification/movie/list?' + searchAPILKey,
-    searchTVRatings = 'https://api.themoviedb.org/3/certification/tv/list?' + searchAPILKey,
-
-    queryURL = 'https://api.themoviedb.org/3/search/keyword?api_key=2429acb131d788573608b3142e21e670&query=aliens&page=1'
+    userRating = 'PG-13',
+    userScreen = "", //Movies or TV
+    userGenre = "", //Main Genre selection
+    userSubGen = "", //Sub Genre selection
+    userQuery = ""; //Keyword search term
 
 
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDjD9JW3pXYNwd6NcnISWaJ3L1ITqH1lHM",
+    authDomain: "project1-10736.firebaseapp.com",
+    databaseURL: "https://project1-10736.firebaseio.com",
+    projectId: "project1-10736",
+    storageBucket: "project1-10736.appspot.com",
+    messagingSenderId: "511473984981"
+};
+firebase.initializeApp(config);
 
+// 1. Link to Firebase
+var movieData = firebase.database(); //currently not sure it's working
 
-
-//AJAX Query Call
-
-$.ajax({
-    url: queryURL,
-    method: "GET"
-}).then(function (response) {
-    console.log(response);
-});
-
+// Flick-Pick JavaScript Pseudocode
+//-------- Basic Logic -----------|
+// 1. Present User with choices
 // Start Button Coding
 $('#startBtn').on('click', function(){
     // When start button is clicked, the button is also hidden, and ...
@@ -63,7 +62,6 @@ $('#startBtn').on('click', function(){
     // Start App function begins
 	startApp();
 });
-
 // New  Function
 function startApp(){
 
@@ -96,94 +94,101 @@ function newQuestion(){
 	});
 
 }
-
-//Database target variables for movies
-//page  .page
-//adult  .results["0"].adult
-// genre  .results["0"].genre_ids["0"]
-// title  .results["0"].title
-//overview  .results[0].overview
-//poster .results["0"].poster_path
-//certification: .certifications.US["0"].certification
-//certification meaning: .certifications.US["0"].meaning
-
-
-//Database target variables for TV
-//page  .page
-// genre  .results["0"].genre_ids["0"]
-//name  .results["0"].name
-//overview  .results[0].overview
-//poster .results["0"].poster_path
-//certification: .certifications.US["0"].certification
-//certification meaning: .certifications.US["0"].meaning
-
-
-// # of pages and results in the database
-// total_pages: 17687 movies / 3643 TV
-//total_results: 353728 movies /72850 TV
-
-//We can Query Multiple Genre ID
-/*"genre_ids": [
-    28,
-    53,
-    12,
-    878
-],*/
-
-
-
-
-
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyDjD9JW3pXYNwd6NcnISWaJ3L1ITqH1lHM",
-    authDomain: "project1-10736.firebaseapp.com",
-    databaseURL: "https://project1-10736.firebaseio.com",
-    projectId: "project1-10736",
-    storageBucket: "project1-10736.appspot.com",
-    messagingSenderId: "511473984981"
-};
-firebase.initializeApp(config);
-
-
-
-// Flick-Pick JavaScript Pseudocode
-//-------- Basic Logic -----------|
-// 1. Present User with choices
 // 2. Store User's choices in Firebase
-// 3. Retrieve User's choices from Firebase
-// 4. Send API query based on User's choices
-// 5. Return results from API query to display in the DOM
+$("#").on("click", function () {
 
-// -------- Expanded Logic -------|
-// Initialize Firebase
-// Create global variables, as needed, for example...
-//Movie Database API Key and Query URL's
-// Search Term Query Variables 
-// 1. Present User with choices
-// AND
-// 2. Store Usesr's choices in Firebase (add more choices as needed)
-// Create on-click event to "Start App"
-// Create on-click event to submit 1st choice (How much time does the user have?)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase    
-// Create on-click event to submit 2nd choice (...)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase
-// Create on-click event to submit 3rd choice (...)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase
-// Create on-click event to submit 3rd choice (...)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase
+    // Grabs user inputs from text boxes and assign to variables
+    var userRating = $('#').val().trim(),
+        userScreen = $('#').val().trim(), //Movies or TV
+        userGenre = $('#').val().trim(), //Main Genre selection
+        userSubGen = $('#').val().trim(), //Sub Genre selection
+        userQuery = $('#').val().trim() //Keyword search term
+
+    // Test for variables entered
+    console.log(userRating);
+    console.log(userScreen);
+    console.log(userGenre);
+    console.log(userSubGen);
+    console.log(userQuery);
+
+    // Creates local "temporary" object for holding user data
+    // Will push this to firebase
+    var newMovieData = {
+        ratings: userRating,
+        screenType: userScreen,
+        genre: userGenre,
+        subgenre: userSubGen, //Sub Genre selection
+        query: userQuery
+    }
+
+    // pushing trainInfo to Firebase
+    movieData.ref().push(newMovieData);
+
+    // clear text-boxes
+    $("keywordInput").val("");
+
+    // Prevents page from refreshing
+    return false;
+});
+
+
 // 3. Retrieve User's choices from Firebase
-// AND
-// 4. Send API query based on User's choices
-// Get user choices from Firebase
-// Concatenate query parameters to API query
-//AJAX Query Call
-// 5. Return results from API query to display in the DOM
-// Hook into contentDiv
-// Use jQuery to create DOM elements for API query results 
-// <img> tag for poster
-// <h> or <p> tag(s) for title, synopsis, etc.
+movieData.ref().on("child_added", function (childSnapshot, prevChildKey) {
+
+    console.log(childSnapshot.val());
+
+    // assign firebase variables to snapshots.
+    var firebaseRatings = childSnapshot.val().ratings;
+    var firebaseScreenType = childSnapshot.val().screenType;
+    var firebaseGenre = childSnapshot.val().genre;
+    var firebaseSubGenre = childSnapshot.val().subgenre;
+    var firebaseQuery = childSnapshot.val().query;
+
+    // Test for correct times and info
+    console.log(firebaseRatings);
+    console.log(firebaseScreenType);
+    console.log(firebaseGenre);
+    console.log(firebaseSubGenre);
+    console.log(firebaseQuery);
+
+    //Sets Query URL for movies and TV's
+    queryURL = 'https://api.themoviedb.org/3/discover/' + firebaseScreenType + searchAPILKey + language + sort + certContry + cert + firebaseRatings + '&include_adult=false&include_video=false&page=1' // Movies
+
+    // 4. Send API query based on User's choices
+    //AJAX Query Call
+    function newMovie(queryURL) {
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+
+            // 5. Return results from API query to display in the DOM
+            console.log(response);
+
+            if (response.data.length > 0) {
+
+                for (i = 0; i < response.data.length; i++) {
+
+                    //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
+                    var img = $('<img>');
+                    img.attr("src", response.results[i].poster_path);
+
+                    //creates new divs for each image that comes through the response
+                    newDiv = $("<div>");
+                    newDiv.addClass("#"); //Adds "giphyBox" class to new image
+
+                    //if response has no title this is how to handle
+                    var title = response.results[i].title;
+                    if (title === "") {
+                        title = response.results[i].name;
+                    }
+                    var overview = response.results[i].overview;
+
+                    // Hook into contentDiv
+                    newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
+                    newDiv.prependTo('#'); //inserts to the DOM
+                }
+            }
+        });
+    }
+});
