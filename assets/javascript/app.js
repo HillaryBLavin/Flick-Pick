@@ -1,4 +1,22 @@
+
 var searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
+
+// Object for Questions and User Options
+
+var userQuestions = 
+    [
+        {question: "Do you want to watch a TV Show or a Movie?",
+        options: ["Television", "Movie"]},
+        {question: "What is the rating you want?",
+        options: ["Choice", "Something", "Um", "I don't know"]},
+        {question: "What Genre are you looking for?",
+        options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV movie", "Thriller", "War", "Western", "Kids", "News", "Reality", "Sci-Fi $ Fantasy", "Soap"]}
+    ],
+
+    currentQuestion,
+    userSelect;
+
+    searchAPILKey = "api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
     sort = '&sort_by=popularity.asc', //string term set sort option
     certContry = '&certification_country=US',
@@ -6,8 +24,13 @@ var searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided 
 
     video = '&include_video=false',
 
-    // Sets Initial variables for the database
 
+    // Sets Initial variables for the database
+    
+
+    //Query by latest movie or TV 
+    searchMovies = 'https://api.themoviedb.org/3/discover/movie?' + searchAPILKey + language + sort + certContry + cert + rating + '&include_adult=false&include_video=false&page=1', // Movies
+    searchTV = 'https://api.themoviedb.org/3/discover/tv?' + searchAPILKey + language + sort + certContry + cert + rating + '&include_adult=false&include_video=false&page=1', //TV
     userRating = 'PG-13',
     userScreen = "", //Movies or TV
     userGenre = "", //Main Genre selection
@@ -32,10 +55,45 @@ var movieData = firebase.database(); //currently not sure it's working
 // Flick-Pick JavaScript Pseudocode
 //-------- Basic Logic -----------|
 // 1. Present User with choices
+// Start Button Coding
+$('#startBtn').on('click', function(){
+    // When start button is clicked, the button is also hidden, and ...
+    $(this).hide();
+    // Start App function begins
+	startApp();
+});
+// New  Function
+function startApp(){
+
+    // Clears prior elements
+	$('#finalMessage').empty();
+
+    // Loads New Question
+	newQuestion();}
 
 
+    // Selects New Question
+function newQuestion(){
+	answered = true;
+	
+	//sets up new questions & answerList
+	$('#currentQuestion').html('<h2>#' + (currentQuestion+1) + '</h2>');
+	$('#question').html('<h3>' + userQuestions[currentQuestion].question + '</h3>');
+	for(var i = 0; i < 4; i++){
+		var choices = $('<div>');
+		choices.text(userQuestions[currentQuestion].options[i]);
+		choices.attr({'data-index': i });
+		choices.addClass('thisChoice');
+    }
+    
+    	//clicking an answer will pause the time and setup answerPage
+	$('.thisChoice').on('click',function(){
+		userSelect = $(this).data('index');
+    
+        // Maybe include some code here to save the choice in the database?
+	});
 
-
+}
 // 2. Store User's choices in Firebase
 $("#").on("click", function () {
 
@@ -53,7 +111,7 @@ $("#").on("click", function () {
     console.log(userSubGen);
     console.log(userQuery);
 
-    // Creates local "temporary" object for holding train data
+    // Creates local "temporary" object for holding user data
     // Will push this to firebase
     var newMovieData = {
         ratings: userRating,
@@ -73,9 +131,8 @@ $("#").on("click", function () {
     return false;
 });
 
+
 // 3. Retrieve User's choices from Firebase
-
-
 movieData.ref().on("child_added", function (childSnapshot, prevChildKey) {
 
     console.log(childSnapshot.val());
@@ -99,7 +156,6 @@ movieData.ref().on("child_added", function (childSnapshot, prevChildKey) {
 
     // 4. Send API query based on User's choices
     //AJAX Query Call
-
     function newMovie(queryURL) {
         $.ajax({
             url: queryURL,
