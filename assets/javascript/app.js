@@ -74,6 +74,7 @@ function startApp(){
 	newQuestion();}
 
 
+
 //Database target variables for movies
 //page  .page
 //adult  .results["0"].adult
