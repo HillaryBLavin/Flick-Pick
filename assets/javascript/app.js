@@ -74,6 +74,28 @@ function startApp(){
 	newQuestion();}
 
 
+    // Selects New Question
+function newQuestion(){
+	answered = true;
+	
+	//sets up new questions & answerList
+	$('#currentQuestion').html('<h2>#' + (currentQuestion+1) + '</h2>');
+	$('#question').html('<h3>' + userQuestions[currentQuestion].question + '</h3>');
+	for(var i = 0; i < 4; i++){
+		var choices = $('<div>');
+		choices.text(userQuestions[currentQuestion].options[i]);
+		choices.attr({'data-index': i });
+		choices.addClass('thisChoice');
+    }
+    
+    	//clicking an answer will pause the time and setup answerPage
+	$('.thisChoice').on('click',function(){
+		userSelect = $(this).data('index');
+    
+        // Maybe include some code here to save the choice in the database?
+	});
+
+
 
 //Database target variables for movies
 //page  .page
