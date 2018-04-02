@@ -73,6 +73,7 @@ function startApp(){
     // Loads New Question
 	newQuestion();}
 
+
     // Selects New Question
 function newQuestion(){
 	answered = true;
@@ -93,6 +94,7 @@ function newQuestion(){
     
         // Maybe include some code here to save the choice in the database?
 	});
+
 
 
 //Database target variables for movies
