@@ -1,8 +1,16 @@
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDjD9JW3pXYNwd6NcnISWaJ3L1ITqH1lHM",
+    authDomain: "project1-10736.firebaseapp.com",
+    databaseURL: "https://project1-10736.firebaseio.com",
+    projectId: "project1-10736",
+    storageBucket: "project1-10736.appspot.com",
+    messagingSenderId: "511473984981"
+};
+firebase.initializeApp(config);
 
-var searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
 
 // Object for Questions and User Options
-
 var userQuestions = 
     [
         {question: "Do you want to watch a TV Show or a Movie?",
@@ -14,23 +22,16 @@ var userQuestions =
     ],
 
     currentQuestion,
-    userSelect;
-
-    searchAPILKey = "api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
+    userSelect,
+    searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
     sort = '&sort_by=popularity.asc', //string term set sort option
     certContry = '&certification_country=US',
     cert = '&certification=',
-
     video = '&include_video=false',
 
 
     // Sets Initial variables for the database
-    
-
-    //Query by latest movie or TV 
-    searchMovies = 'https://api.themoviedb.org/3/discover/movie?' + searchAPILKey + language + sort + certContry + cert + rating + '&include_adult=false&include_video=false&page=1', // Movies
-    searchTV = 'https://api.themoviedb.org/3/discover/tv?' + searchAPILKey + language + sort + certContry + cert + rating + '&include_adult=false&include_video=false&page=1', //TV
     userRating = 'PG-13',
     userScreen = "", //Movies or TV
     userGenre = "", //Main Genre selection
@@ -38,16 +39,7 @@ var userQuestions =
     userQuery = ""; //Keyword search term
 
 
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyDjD9JW3pXYNwd6NcnISWaJ3L1ITqH1lHM",
-    authDomain: "project1-10736.firebaseapp.com",
-    databaseURL: "https://project1-10736.firebaseio.com",
-    projectId: "project1-10736",
-    storageBucket: "project1-10736.appspot.com",
-    messagingSenderId: "511473984981"
-};
-firebase.initializeApp(config);
+
 
 // 1. Link to Firebase
 var movieData = firebase.database(); //currently not sure it's working
@@ -62,11 +54,12 @@ $('#startBtn').on('click', function(){
     // Start App function begins
 	startApp();
 });
-// New  Function - Run the
+// New  Function - Run the App
 function startApp(){
 
     // Loads New Question
-	newQuestion();}
+    newQuestion();
+}
 
 // Selects New Question
 function newQuestion(){
