@@ -15,12 +15,12 @@
     // tvQuestions - an array that holds the tv questions and their possible answers
     tvQuestions = [
         { // TV Ratings Choices
-            question: "What is the rating you want?",
+            question: "Who's watching? Pick a rating!", // What is the rating you want?
             options: ['TV-Y: Programs designed to be appropriate for all children.', 'TV-Y7: Programs designed for children ages 7 and above.', 'TV-G: Program most parents would find suitable for all ages.', 'TV-PG: Programs containing materials that parents may find unsuitable for younger children.', 'TV-14: Programs containing some material is unsuitable for children under 14 years of age.', 'TV-MA: Programs specifically designed to be viewed by adults and unsuitable for children under 17.'],
             valuesID: ['TV-Y', 'TV-Y7', 'TV-G', 'TV-PG', 'TV-14', 'TV-MA']
         },
         { //TV Genres
-            question: "What Genre are you looking for?",
+            question: "What kinda show d'you wanna watch?", // What Genre are you looking for?
             options: ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi & Fantasy', 'Soap', 'Talk Show', 'War & Politics', 'Western'],
             valuesID: [10759, 16, 35, 80, 99, 18, 10751, 10762, 9648, 10763, 10764, 10765, 10766, 10767, 10768, 37]
         }
@@ -28,12 +28,12 @@
     // movieQuestions - an array that holds the movie questions and their possible answers
     movieQuestions = [
         { // Movie Ratings Choices
-            question: "What is the rating you want?",
+            question: "Who's watching? Pick a rating!", // What is the rating you want?
             options: ['G: For all ages.', 'NC-17: Parents would consider too strong for viewing by their children and teens.', 'NR: No rating information.', 'PG: Some material may not be suitable for children under 10.', 'PG-13: Some material may be inappropriate for children under 13. ', 'R: If under 17, requires accompanying parent or adult guardian 21 or older.'],
             valuesID: ['G', 'NC-17', 'NR', 'PG', 'PG-13', 'R']
         },
         { // Movie Genres
-            question: "What Genre are you looking for?",
+            question: "What kinda movie d'you wanna watch?", // What Genre are you looking for?
             options: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'Thriller', 'TV Movie', 'War', 'Western'],
             valuesID: [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 53, 10770, 10752, 37]
         }
@@ -84,7 +84,16 @@ function tvRatingsChoice() {
 // Create on-click event for when user selets a rating
 $(document.body).on("click", "#rating-choice", function() {
     var userRating = $(this).data("value");
+    tvGenreChoice();
 })
+function tvGenreChoice() {
+    // Display second question in tvQuestions
+    $("#question").html("<h4>" + tvQuestions[1].question + "</h4>");
+    // Display choices using for-loop
+    for (i = 0; i < tvQuestions[0].options.length; i++) {
+        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
+    }
+}
 
 
 
