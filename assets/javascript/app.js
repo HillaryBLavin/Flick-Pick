@@ -85,14 +85,37 @@ function newQuestion(){
 		$('#answerList').append(choices);
 	}
 
-	//clicking an answer will pause the time and setup answerPage
+	//clicking an answer will setup nextQuestion
 	$('.thisChoice').on('click',function(){
 		userSelect = $(this).data('index');
-		clearInterval(time);
-		answerPage();
+        nextQuestion();
+
 	});
 }
 
+// Next Question function
+function nextQuestion(){
+    // Clears Previous Elements
+    $('#currentQuestion').empty();
+	$('.thisChoice').empty(); 
+	$('.question').empty();
+        
+    // Set Answered to 'true'
+    answered = true;
+	
+	// If the current question reaches the end of the trivia list, stop the timer, show the scoreboard
+	if(currentQuestion == (userQuestions.length-1)){
+        
+        // This is where we'd link to recommendation function
+        // insert code here
+        // this code doesn't exist yet
+    
+    // Otherwise add another question
+	} else{
+		currentQuestion++;
+		newQuestion();
+    }
+}
 
 
 
