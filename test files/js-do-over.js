@@ -6,33 +6,39 @@
 //---------- WELCOME TO FLICK PICK! ---------------\\
 
 // Create global variables
-var userQuestions = [{
-    question: "Do you want to watch a TV Show or a Movie?",
-    options: ["Television", "Movie"],
-    valuesID: ['television', 'movie']
-},
-{ // Movie Ratings Choices
-    question: "What is the rating you want?",
-    options: ['NR: No rating information.', 'TV-Y: Programs designed to be appropriate for all children.', 'TV-Y7: Programs designed for children ages 7 and above.', 'TV-G: Program most parents would find suitable for all ages.', 'TV-PG: Programs containing materials that parents may find unsuitable for younger children.', 'TV-14: Programs containing some material is unsuitable for children under 14 years of age.', 'TV-MA: Programs specifically designed to be viewed by adults and unsuitable for children under 17.'],
-    valuesID: ['NR', 'TV-Y', 'TV-Y7', 'TV-G', 'TV-PG', 'TV-14', 'TV-MA']
-},
-{ // TV Ratings Choices
-    question: "What is the rating you want?",
-    options: ['G: For all ages.', 'NC-17: Parents would consider too strong for viewing by their children and teens.', 'NR: No rating information.', 'PG: Some material may not be suitable for children under 10.', 'PG-13: Some material may be inappropriate for children under 13. ', 'R: If under 17, requires accompanying parent or adult guardian 21 or older.'],
-    valuesID: ['G', 'NC-17', 'NR', 'PG', 'PG-13', 'R']
-},
-{ // Movie Genres
-    question: "What Genre are you looking for?",
-    options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "Thriller", "TV Movie", "War", "Western"],
-    valuesID: [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 53, 10770, 10752, 37]
-},
-{ // TV Genres
-    question: "What Genre are you looking for?",
-    options: ["Action & Adventures", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", 'Kids', "Mystery", "News", "Reality", "Sci-Fi $ Fantasy", "Soap", "Talk Show", 'War & Politics', "Western"],
-    valuesID: [10759, 16, 35, 80, 99, 18, 10751, 10762, 9648, 10763, 10764, 10765, 10766, 10767, 10768, 37]
-}
-],
-    currentQuestion = 0, // Used to calculate the currently displayed question
+// Create userQuestions - an array to hold the questions presented to the user, their answers, and the values associated with those answers in The Movie Database API
+    var userQuestions = [{
+        question: "Do you want to watch a TV Show or a Movie?",
+        options: ["Television", "Movie"],
+        valuesID: ['television', 'movie']
+        },
+        { // Movie Ratings Choices
+            question: "What is the rating you want?",
+            options: ['NR: No rating information.', 'TV-Y: Programs designed to be appropriate for all children.', 'TV-Y7: Programs designed for children ages 7 and above.', 'TV-G: Program most parents would find suitable for all ages.', 'TV-PG: Programs containing materials that parents may find unsuitable for younger children.', 'TV-14: Programs containing some material is unsuitable for children under 14 years of age.', 'TV-MA: Programs specifically designed to be viewed by adults and unsuitable for children under 17.'],
+            valuesID: ['NR', 'TV-Y', 'TV-Y7', 'TV-G', 'TV-PG', 'TV-14', 'TV-MA']
+        },
+        { // TV Ratings Choices
+            question: "What is the rating you want?",
+            options: ['G: For all ages.', 'NC-17: Parents would consider too strong for viewing by their children and teens.', 'NR: No rating information.', 'PG: Some material may not be suitable for children under 10.', 'PG-13: Some material may be inappropriate for children under 13. ', 'R: If under 17, requires accompanying parent or adult guardian 21 or older.'],
+            valuesID: ['G', 'NC-17', 'NR', 'PG', 'PG-13', 'R']
+        },
+        { // Movie Genres
+            question: "What Genre are you looking for?",
+            options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "Thriller", "TV Movie", "War", "Western"],
+            valuesID: [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 53, 10770, 10752, 37]
+        },
+        { // TV Genres
+            question: "What Genre are you looking for?",
+            options: ["Action & Adventures", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", 'Kids', "Mystery", "News", "Reality", "Sci-Fi $ Fantasy", "Soap", "Talk Show", 'War & Politics', "Western"],
+            valuesID: [10759, 16, 35, 80, 99, 18, 10751, 10762, 9648, 10763, 10764, 10765, 10766, 10767, 10768, 37]
+        }
+        ];
+    // Create 'app' object - holds all app properties and methods
+    var app = {
+        questions: userQuestions, // Pulls questions from the userQuestions array
+        currentQuestion: 0, // Provides index of currently displayed question
+    }
+    
     userSelect,
     value,
     searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", // Key for The Movie Databse API query
@@ -66,105 +72,51 @@ function startApp() {
 }
 
 // Write newQuestion function
-function newQuestion() {
+// Selects New Question
+function newQuestion(){
+	$('#message').empty();
+	answered = true;
+	
+	//sets up new questions & answerList
+	
+	$('#question').html('<h4>' + userQuestions[currentQuestion].question + '</h4>');
+	for(var i = 0; i < 24; i++){
+		var choices = $('<div>');
+		choices.text(userQuestions[currentQuestion].options[i]);
+		choices.attr({'data-index': i });
+		choices.addClass('thisChoice');
+		$('#answerList').append(choices);
+	}
 
-    answered = true;
-
-    //3.3.1 - sets up new questions & answerList
-
-    $('#question').html('<h4>' + userQuestions[currentQuestion].question + '</h4>');
-    for (var i = 0; i < 24; i++) {
-        var choices = $('<div>');
-        choices.text(userQuestions[currentQuestion].options[i]);
-        choices.attr({
-            'data-index': i
-        });
-        choices.addClass('thisChoice');
-        choices.attr({
-            'value': userQuestions[currentQuestion].valuesID[i]
-        });
-        $('#answerList').append(choices);
-    }
-
-    //clicking an answer will setup nextQuestion
-    $(document.body).on('click', '.thisChoice', function () {
-
-        userSelect = $(this).data('index');
-        value = $(this).attr('value');
-        console.log(value);
-
-        // Grabs user inputs from text boxes and assign to variables
-        if (currentQuestion === 0) {
-            var movieData = firebase.database();
-            userScreen = value;
-            console.log(value);
-            var newMovieData = {
-                screenType: userScreen
-            };
-            movieData.ref().push(newMovieData);
-            console.log(newMovieData);
-        } else if (currentQuestion === 1) {
-            var movieData = firebase.database()
-            userRating = value; //Movie Ratings selection
-            var newMovieData = {
-                ratings: userRating,
-            }
-            movieData.ref().push(newMovieData);
-            console.log(userRating);
-        } else if (currentQuestion === 2) {
-            var movieData = firebase.database()
-            userRating = value; //Movie Ratings selection
-            var newMovieData = {
-                ratings: userRating,
-            }
-            movieData.ref().push(newMovieData);
-            console.log(userRating);
-        } else if (currentQuestion === 3) {
-            var movieData = firebase.database()
-            userGenre = value; //Main Genre selection 
-            var newMovieData = {
-                genre: userGenre,
-            }
-            movieData.ref().push(newMovieData);
-            console.log(userGenre);
-        } else if (currentQuestion === 4) {
-            var movieData = firebase.database()
-            userGenre = value; //Main Genre selection
-            var newMovieData = {
-                genre: userGenre,
-            }
-            movieData.ref().push(newMovieData);
-            console.log(userGenre);
-        };
-      
+	//clicking an answer will setup nextQuestion
+	$('.thisChoice').on('click',function(){
+		userSelect = $(this).data('index');
         nextQuestion();
 
-        //     MovieData.ref().push(newMovieData);
-    });
-
+	});
 }
 
 // Next Question function
-function nextQuestion() {
-
+function nextQuestion(){
     // Clears Previous Elements
-    $('#answerList').empty(); // Clears the AnswerList <div> (no other empty needed)
-
+    $('#currentQuestion').empty();
+	$('.thisChoice').empty(); 
+	$('.question').empty();
+        
     // Set Answered to 'true'
     answered = true;
-
-
-    // If the current question reaches the end of the trivia list, show the recommendations 
-    if (currentQuestion == (userQuestions.length - 1)) {
-
+	
+	// If the current question reaches the end of the trivia list, stop the timer, show the scoreboard
+	if(currentQuestion == (userQuestions.length-1)){
+        
         // This is where we'd link to recommendation function
         // insert code here
         // this code doesn't exist yet
-
-        // Otherwise add another question
-    } else {
-        currentQuestion++;
-        newQuestion();
+    
+    // Otherwise add another question
+	} else{
+		currentQuestion++;
+		newQuestion();
     }
 }
 
