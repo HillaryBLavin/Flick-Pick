@@ -66,21 +66,18 @@ function newQuestion(){
 	answered = true;
 	
 	//sets up new questions & answerList
-	$('#currentQuestion').html('<h2>#' + (currentQuestion+1) + '</h2>');
-	$('#question').html('<h3>' + userQuestions[currentQuestion].question + '</h3>');
+	$('#currentQuestion').html('<h3>#' + (currentQuestion+1) + '</h3>');
+	$('#question').html('<h4>' + userQuestions[currentQuestion].question + '</h4>');
     for(var i = 0; i < userQuestions.options.length; i++){
 		var choices = $('<div>');
 		choices.text(userQuestions[currentQuestion].options[i]);
 		choices.attr({'data-index': i });
 		choices.addClass('thisChoice');
     }
-    
-    	
-        // Maybe include some code here to save the choice in the database?
 	};
 
 // 2. Store User's choices in Firebase
-$("#").on("click", function () {
+$(document.body).on("click", ".thisChoice", function () {
 
     // Grabs user inputs from text boxes and assign to variables
     var userRating = $('#').val().trim(),
