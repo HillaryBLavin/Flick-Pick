@@ -20,7 +20,6 @@ var userQuestions =
         {question: "What Genre are you looking for?",
         options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV movie", "Thriller", "War", "Western", "Kids", "News", "Reality", "Sci-Fi $ Fantasy", "Soap"]}
     ],
-
     currentQuestion,
     userSelect,
     searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
@@ -54,27 +53,48 @@ $('#startBtn').on('click', function(){
     // Start App function begins
 	startApp();
 });
-// New  Function - Run the App
+
+// Function for startApp 
+
+
 function startApp(){
 
+    // Clears prior elements
+	$('#finalMessage').empty();
+
+    // Resets Values
+	currentQuestion = 0;
+	
     // Loads New Question
-    newQuestion();
+	newQuestion();
 }
 
 // Selects New Question
 function newQuestion(){
+	$('#message').empty();
 	answered = true;
 	
 	//sets up new questions & answerList
-	$('#currentQuestion').html('<h3>' + (currentQuestion+1) + '</h3>');
+	$('#currentQuestion').html('<h3>Question #' + (currentQuestion+1) + '</h3>');
 	$('#question').html('<h4>' + userQuestions[currentQuestion].question + '</h4>');
-    for(var i = 0; i < userQuestions.options.length; i++){
+	for(var i = 0; i < 2; i++){
 		var choices = $('<div>');
 		choices.text(userQuestions[currentQuestion].options[i]);
 		choices.attr({'data-index': i });
 		choices.addClass('thisChoice');
-    }
-	};
+		$('#answerList').append(choices);
+	}
+
+	//clicking an answer will pause the time and setup answerPage
+	$('.thisChoice').on('click',function(){
+		userSelect = $(this).data('index');
+		clearInterval(time);
+		answerPage();
+	});
+}
+
+
+
 
 // 2. Store User's choices in Firebase
 $(document.body).on("click", ".thisChoice", function () {
