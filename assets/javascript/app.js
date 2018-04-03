@@ -77,7 +77,7 @@ function newQuestion(){
 	//sets up new questions & answerList
 	
 	$('#question').html('<h4>' + userQuestions[currentQuestion].question + '</h4>');
-	for(var i = 0; i < 2; i++){
+	for(var i = 0; i < 24; i++){
 		var choices = $('<div>');
 		choices.text(userQuestions[currentQuestion].options[i]);
 		choices.attr({'data-index': i });
