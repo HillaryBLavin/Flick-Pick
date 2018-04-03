@@ -39,6 +39,10 @@
         }
     ];
 
+    // Initialize global variables for the user's choice of rating and genre, to be used later for API query
+    userRating = '',
+    userGenre,
+
 // 1. Present user with choices
 // Start Button on-click event - starts the app
 $('#startBtn').on('click', function () {
@@ -68,14 +72,25 @@ $(document.body).on("click", "#choice1", function() {
     $("#answerList").empty();
     tvRatingsChoice();
 })
+// Define tvRatingsChoice - this will display options for TV Show
 function tvRatingsChoice() {
     // Display first question in tvQuestions
     $("#question").html("<h4>" + tvQuestions[0].question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < tvQuestions[0].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='choice" + (i+1) + "'>" + tvQuestions[0].options[i] + "</button>");
+        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
     }
 }
+// Create on-click event for when user selets a rating
+$(document.body).on("click", "#rating-choice", function() {
+    var userRating = $(this).data("value");
+})
+
+
+
+
+
+
 
 
 // MOVIE LOGIC
