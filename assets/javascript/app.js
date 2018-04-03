@@ -54,26 +54,71 @@ $('#startBtn').on('click', function(){
     // Start App function begins
 	startApp();
 });
-// New  Function - Run the App
+
+// Function for startApp 
+
+
 function startApp(){
 
+    // Clears prior elements
+	$('#finalMessage').empty();
+
+    // Resets Values
+	currentQuestion = 0;
+	
     // Loads New Question
-    newQuestion();
+	newQuestion();
 }
 
 // Selects New Question
 function newQuestion(){
+	$('#message').empty();
 	answered = true;
 	
 	//sets up new questions & answerList
+	
 	$('#question').html('<h4>' + userQuestions[currentQuestion].question + '</h4>');
-    for(var i = 0; i < userQuestions.options.length; i++){
+	for(var i = 0; i < 24; i++){
 		var choices = $('<div>');
 		choices.text(userQuestions[currentQuestion].options[i]);
 		choices.attr({'data-index': i });
 		choices.addClass('thisChoice');
+		$('#answerList').append(choices);
+	}
+
+	//clicking an answer will setup nextQuestion
+	$('.thisChoice').on('click',function(){
+		userSelect = $(this).data('index');
+        nextQuestion();
+
+	});
+}
+
+// Next Question function
+function nextQuestion(){
+    // Clears Previous Elements
+    $('#currentQuestion').empty();
+	$('.thisChoice').empty(); 
+	$('.question').empty();
+        
+    // Set Answered to 'true'
+    answered = true;
+	
+	// If the current question reaches the end of the trivia list, stop the timer, show the scoreboard
+	if(currentQuestion == (userQuestions.length-1)){
+        
+        // This is where we'd link to recommendation function
+        // insert code here
+        // this code doesn't exist yet
+    
+    // Otherwise add another question
+	} else{
+		currentQuestion++;
+		newQuestion();
     }
-	};
+}
+
+
 
 // 2. Store User's choices in Firebase
 $(document.body).on("click", ".thisChoice", function () {
