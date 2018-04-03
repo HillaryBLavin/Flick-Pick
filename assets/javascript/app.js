@@ -21,7 +21,7 @@ var userQuestions =
         options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV movie", "Thriller", "War", "Western", "Kids", "News", "Reality", "Sci-Fi $ Fantasy", "Soap"]}
     ],
 
-    currentQuestion,
+    currentQuestion = 0,
     userSelect,
     searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
@@ -66,7 +66,6 @@ function newQuestion(){
 	answered = true;
 	
 	//sets up new questions & answerList
-	$('#currentQuestion').html('<h3>' + (currentQuestion+1) + '</h3>');
 	$('#question').html('<h4>' + userQuestions[currentQuestion].question + '</h4>');
     for(var i = 0; i < userQuestions.options.length; i++){
 		var choices = $('<div>');
