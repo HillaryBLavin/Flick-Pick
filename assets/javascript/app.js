@@ -66,7 +66,7 @@ function newQuestion(){
 	answered = true;
 	
 	//sets up new questions & answerList
-	$('#currentQuestion').html('<h3>#' + (currentQuestion+1) + '</h3>');
+	$('#currentQuestion').html('<h3>' + (currentQuestion+1) + '</h3>');
 	$('#question').html('<h4>' + userQuestions[currentQuestion].question + '</h4>');
     for(var i = 0; i < userQuestions.options.length; i++){
 		var choices = $('<div>');
