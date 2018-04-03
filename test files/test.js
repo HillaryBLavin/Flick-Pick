@@ -1,3 +1,6 @@
+// The follow document is from the code snippet Rei posted in Slack on 4-3-18 at 3:08AM
+
+
 //Initialization of key variables and databases
 
 // 1.0 - Initialize Firebase
@@ -38,7 +41,7 @@ var userQuestions = [{
         },
         { //TV Genres
             question: "What Genre are you looking for?",
-            options: ["Action & Adventures", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", 'Kids', "Mystery", "News", "Reality", "Sci-Fi $ Fantasy", "Soap", "Talk Show", 'War & Politics', "Western"],
+            options: ["Action & Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", 'Kids', "Mystery", "News", "Reality", "Sci-Fi $ Fantasy", "Soap", "Talk Show", 'War & Politics', "Western"],
             valuesID: [10759, 16, 35, 80, 99, 18, 10751, 10762, 9648, 10763, 10764, 10765, 10766, 10767, 10768, 37]
         }
     ],
