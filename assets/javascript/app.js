@@ -10,7 +10,7 @@
     // screenTypeOption - an object that holds the intial question and two possible answers
     var screenTypeOption = {
         question: "Do you want to watch a TV Show or a Movie?",
-        options: ['TV Show', 'Movie']
+        options: ['<img src="assets/images/TVshow.png" class="opt" alt="TV Show"', '<img src="assets/images/MOVie.png" class="opt" alt="Movie">']
     },
     // tvQuestions - an array that holds the tv questions and their possible answers
     tvQuestions = [
@@ -73,7 +73,7 @@ function chooseScreen() {
     $("#question").html("<h4>" + screenTypeOption.question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < screenTypeOption.options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='choice" + (i+1) + "'>" + screenTypeOption.options[i] + "</button>");
+        $("#answerList").append("<class='firstChoice' id='choice" + (i+1) + "'>" + screenTypeOption.options[i] + "</>");
     }
 }
 
