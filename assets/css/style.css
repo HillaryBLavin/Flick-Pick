@@ -51,3 +51,24 @@ h2 {
 button {
     margin: 10px !important;
 }
+
+
+
+
+
+.opt {
+    padding: 10px;
+    background-color: rgb(255, 255, 255, .0);
+    transition: transform .2s; /* Animation */
+    width: 200px;
+    height: 232px;
+    margin: 0 auto;
+}
+
+.opt:hover {
+    -webkit-filter: brightness(1.05) contrast(1.05);
+            filter: brightness(1.05) contrast(1.05);
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+}
+
