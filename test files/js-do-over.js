@@ -41,7 +41,17 @@
 
     // Initialize global variables for the user's choice of rating and genre, to be used later for API query
     userRating = '',
-    userGenre,
+    userGenre = '',
+    searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
+    language = '&language=en-US', //string term to set english language movies
+    sort = '&sort_by=popularity.asc', //string term set sort option
+    certContry = '&certification_country=US',
+    cert = '&certification=',
+    video = '&include_video=false',
+    tvQueryURL = 'https://api.themoviedb.org/3/discover/television' + searchAPILKey + language + sort + certContry + cert + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1'
+
+    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + searchAPILKey + language + sort + certContry + cert + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1' 
+
 
 // 1. Present user with choices
 // Start Button on-click event - starts the app
@@ -72,7 +82,7 @@ $(document.body).on("click", "#choice1", function() {
     $("#answerList").empty();
     tvRatingsChoice();
 })
-// Define tvRatingsChoice - this will display options for TV Show
+// Define tvRatingsChoice - this will display TV Show Ratings options
 function tvRatingsChoice() {
     // Display first question in tvQuestions
     $("#question").html("<h4>" + tvQuestions[0].question + "</h4>");
@@ -83,19 +93,69 @@ function tvRatingsChoice() {
 }
 // Create on-click event for when user selets a rating
 $(document.body).on("click", "#rating-choice", function() {
-    var userRating = $(this).data("value");
+    userRating = $(this).data("value");
+    console.log(userRating);
+    $("#question").empty();
+    $("#answerList").empty();
     tvGenreChoice();
 })
+// Define tvGenreChoice - this will display TV Show genre options
 function tvGenreChoice() {
     // Display second question in tvQuestions
     $("#question").html("<h4>" + tvQuestions[1].question + "</h4>");
     // Display choices using for-loop
-    for (i = 0; i < tvQuestions[0].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
+    for (i = 0; i < tvQuestions[1].options.length; i++) {
+        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='genre-choice' data-value='" + tvQuestions[1].valuesID[i] + "'>" + tvQuestions[1].options[i] + "</button>");
     }
 }
+// Create on-click event for when user selets a genre
+$(document.body).on("click", "#genre-choice", function() {
+    userGenre = $(this).data("value");
+    console.log(userGenre);
+    $("#question").empty();
+    $("#answerList").empty();
+    tvQuery();
+})
 
+// Define tvQuery - the ajax call to The Movie Database API
+function tvQuery() {
 
+}
+function newMovie(queryURL) {
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+
+        // 5. Return results from API query to display in the DOM
+        console.log(response);
+
+        if (response.data.length > 0) {
+
+            for (i = 0; i < response.data.length; i++) {
+
+                //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
+                var img = $('<img>');
+                img.attr("src", response.results[i].poster_path);
+
+                //creates new divs for each image that comes through the response
+                newDiv = $("<div>");
+                newDiv.addClass("#"); //Adds "giphyBox" class to new image
+
+                //if response has no title this is how to handle
+                var title = response.results[i].title;
+                if (title === "") {
+                    title = response.results[i].name;
+                }
+                var overview = response.results[i].overview;
+
+                // Hook into contentDiv
+                newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
+                newDiv.prependTo('#'); //inserts to the DOM
+            }
+        }
+    });
+}
 
 
 
