@@ -131,41 +131,7 @@ function tvQuery() {
         console.log(response);
     });
 }
-// function newMovie(queryURL) {
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     }).then(function (response) {
 
-//         // 5. Return results from API query to display in the DOM
-//         console.log(response);
-
-//         if (response.data.length > 0) {
-
-//             for (i = 0; i < response.data.length; i++) {
-
-//                 //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
-//                 var img = $('<img>');
-//                 img.attr("src", response.results[i].poster_path);
-
-//                 //creates new divs for each image that comes through the response
-//                 newDiv = $("<div>");
-//                 newDiv.addClass("#"); //Adds "giphyBox" class to new image
-
-//                 //if response has no title this is how to handle
-//                 var title = response.results[i].title;
-//                 if (title === "") {
-//                     title = response.results[i].name;
-//                 }
-//                 var overview = response.results[i].overview;
-
-//                 // Hook into contentDiv
-//                 newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
-//                 newDiv.prependTo('#'); //inserts to the DOM
-//             }
-//         }
-//     });
-// }
 
 
 
