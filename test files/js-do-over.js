@@ -44,7 +44,7 @@
     userGenre = '',
     apiKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
-    sort = '&sort_by=popularity.asc', //string term set sort option
+    sort = '&sort_by=popularity.desc', //string term set sort option
     certCountry = '&certification_country=US',
     cert = '&certification=',
     video = '&include_video=false',
