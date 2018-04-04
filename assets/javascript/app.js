@@ -10,7 +10,7 @@
     // screenTypeOption - an object that holds the intial question and two possible answers
     var screenTypeOption = {
         question: "Do you want to watch a TV Show or a Movie?",
-        options: ['TV Show', 'Movie']
+        options: ['<img src="assets/images/TVshow.png" class="opt" alt="TV Show"', '<img src="assets/images/MOVie.png" class="opt" alt="Movie">']
     },
     // tvQuestions - an array that holds the tv questions and their possible answers
     tvQuestions = [
@@ -44,7 +44,7 @@
     userGenre = '',
     apiKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
-    sort = '&sort_by=popularity.asc', //string term set sort option
+    sort = '&sort_by=popularity.desc', //string term set sort option
     certCountry = '&certification_country=US',
     cert = '&certification=',
     video = '&include_video=false',
@@ -73,7 +73,7 @@ function chooseScreen() {
     $("#question").html("<h4>" + screenTypeOption.question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < screenTypeOption.options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='choice" + (i+1) + "'>" + screenTypeOption.options[i] + "</button>");
+        $("#answerList").append("<class='firstChoice' id='choice" + (i+1) + "'>" + screenTypeOption.options[i] + "</>");
     }
 }
 
@@ -93,7 +93,7 @@ function tvRatingsChoice() {
     $("#question").html("<h4>" + tvQuestions[0].question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < tvQuestions[0].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='tv-rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
+        $("#answerList").append("<button class='buttonRating' id='tv-rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
     }
 }
 // Create on-click event for when user selets a rating
@@ -131,8 +131,31 @@ function tvQuery() {
     }).then(function (response) {
         console.log(response);
         // Insert code for writing the results to the DOM here
+        if (response.results.length > 0) {
+
+            for (i = 0; i < response.results.length; i++) {
+
+                //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
+                var img = $('<img>');
+                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path);
+
+                //creates new divs for each image that comes through the response
+                newDiv = $("<div>");
+                //newDiv.addClass("#"); //Adds "giphyBox" class to new image
+
+                //if response has no title this is how to handle
+                var title = response.results[i].name;
+                var overview = response.results[i].overview;
+
+                // Hook into contentDiv
+                newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
+                newDiv.prependTo('#answerList'); //inserts to the DOM
+            }
+        }
         console.log(tvQueryURL);
         resetApp();
+
+
     });
 }
 
@@ -188,8 +211,31 @@ function movieQuery() {
     }).then(function (response) {
         console.log(response);
         // Insert code for writing the results to the DOM here
+        if (response.results.length > 0) {
+
+            for (i = 0; i < response.results.length; i++) {
+
+                //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
+                var img = $('<img>');
+                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path);
+
+                //creates new divs for each image that comes through the response
+                newDiv = $("<div>");
+                //newDiv.addClass("#"); //Adds "giphyBox" class to new image
+
+                //if response has no title this is how to handle
+                var title = response.results[i].title;
+                var overview = response.results[i].overview;
+
+                // Hook into contentDiv
+                newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
+                newDiv.prependTo('#answerList'); //inserts to the DOM
+            }
+        }
         console.log(movieQueryURL);
         resetApp();
+
+
     });
     
     
