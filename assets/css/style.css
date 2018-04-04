@@ -34,7 +34,7 @@ h2 {
 .television {
     background-image:url("../images/TV.png");
     width:100%;
-    height: 600px;
+    height: 100%;
     margin-top: -10px;
     background-size:cover;
 }
@@ -81,8 +81,14 @@ button {
     border-radius: 50%;
     margin: 20px;
     padding: 20px;
+    background-color: #556491;
+    color: #fff;
+    border: 2px black solid;
 
 }
 .buttonRating:hover {
-    display:block;
+    display:inline;
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+    
 }
