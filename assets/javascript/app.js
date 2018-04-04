@@ -93,7 +93,7 @@ function tvRatingsChoice() {
     $("#question").html("<h4>" + tvQuestions[0].question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < tvQuestions[0].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='tv-rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
+        $("#answerList").append("<button class='buttonRating' id='tv-rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
     }
 }
 // Create on-click event for when user selets a rating
