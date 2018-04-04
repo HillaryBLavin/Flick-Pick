@@ -42,15 +42,15 @@
     // Initialize global variables for the user's choice of rating and genre, to be used later for API query
     userRating = '',
     userGenre = '',
-    searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
+    apiKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
     sort = '&sort_by=popularity.asc', //string term set sort option
-    certContry = '&certification_country=US',
+    certCountry = '&certification_country=US',
     cert = '&certification=',
     video = '&include_video=false',
-    tvQueryURL = 'https://api.themoviedb.org/3/discover/television' + searchAPILKey + language + sort + certContry + cert + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1'
+    tvQueryURL = 'https://api.themoviedb.org/3/discover/television' + apiKey + language + sort + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1'
 
-    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + searchAPILKey + language + sort + certContry + cert + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1' 
+    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + searchAPILKey + language + sort + certCountry + cert + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1' 
 
 
 // 1. Present user with choices
