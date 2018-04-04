@@ -93,11 +93,11 @@ function tvRatingsChoice() {
     $("#question").html("<h4>" + tvQuestions[0].question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < tvQuestions[0].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
+        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='tv-rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
     }
 }
 // Create on-click event for when user selets a rating
-$(document.body).on("click", "#rating-choice", function() {
+$(document.body).on("click", "#tv-rating-choice", function() {
     userRating = $(this).data("value");
     console.log(userRating);
     $("#question").empty();
@@ -110,11 +110,11 @@ function tvGenreChoice() {
     $("#question").html("<h4>" + tvQuestions[1].question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < tvQuestions[1].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='genre-choice' data-value='" + tvQuestions[1].valuesID[i] + "'>" + tvQuestions[1].options[i] + "</button>");
+        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='tv-genre-choice' data-value='" + tvQuestions[1].valuesID[i] + "'>" + tvQuestions[1].options[i] + "</button>");
     }
 }
 // Create on-click event for when user selets a genre
-$(document.body).on("click", "#genre-choice", function() {
+$(document.body).on("click", "#tv-genre-choice", function() {
     userGenre = $(this).data("value");
     console.log(userGenre);
     $("#question").empty();
@@ -146,11 +146,11 @@ function movieRatingsChoice() {
     $("#question").html("<h4>" + movieQuestions[0].question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < movieQuestions[0].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='rating-choice' data-value='" + movieQuestions[0].valuesID[i] + "'>" + movieQuestions[0].options[i] + "</button>");
+        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='movie-rating-choice' data-value='" + movieQuestions[0].valuesID[i] + "'>" + movieQuestions[0].options[i] + "</button>");
     }
 }
 // Create on-click event for when user selets a rating
-$(document.body).on("click", "#rating-choice", function() {
+$(document.body).on("click", "#movie-rating-choice", function() {
     userRating = $(this).data("value");
     console.log(userRating);
     $("#question").empty();
@@ -163,11 +163,11 @@ function movieGenreChoice() {
     $("#question").html("<h4>" + tvQuestions[1].question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < movieQuestions[1].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='genre-choice' data-value='" + movieQuestions[1].valuesID[i] + "'>" + movieQuestions[1].options[i] + "</button>");
+        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='movie-genre-choice' data-value='" + movieQuestions[1].valuesID[i] + "'>" + movieQuestions[1].options[i] + "</button>");
     }
 }
 // Create on-click event for when user selets a genre
-$(document.body).on("click", "#genre-choice", function() {
+$(document.body).on("click", "#movie-genre-choice", function() {
     userGenre = $(this).data("value");
     console.log(userGenre);
     $("#question").empty();
@@ -178,7 +178,7 @@ $(document.body).on("click", "#genre-choice", function() {
 // Define tvQuery - the ajax call to The Movie Database API
 function movieQuery() {
     $.ajax({
-        url: testURL,
+        url: movieQueryURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
