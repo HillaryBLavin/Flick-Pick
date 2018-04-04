@@ -20,7 +20,8 @@ var userQuestions =
         {question: "What Genre are you looking for?",
         options: ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV movie", "Thriller", "War", "Western", "Kids", "News", "Reality", "Sci-Fi $ Fantasy", "Soap"]}
     ],
-    currentQuestion,
+
+    currentQuestion = 0,
     userSelect,
     searchAPILKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
@@ -217,33 +218,3 @@ movieData.ref().on("child_added", function (childSnapshot, prevChildKey) {
         });
     }
 });
-// Create global variables, as needed, for example...
-//Movie Database API Key and Query URL's
-// Search Term Query Variables 
-// 1. Present User with choices
-// AND
-// 2. Store Usesr's choices in Firebase (add more choices as needed)
-// Create on-click event to "Start App"
-// Create on-click event to submit 1st choice (How much time does the user have?)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase    
-// Create on-click event to submit 2nd choice (...)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase
-// Create on-click event to submit 3rd choice (...)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase
-// Create on-click event to submit 3rd choice (...)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase
-// 3. Retrieve User's choices from Firebase
-// AND
-// 4. Send API query based on User's choices
-// Get user choices from Firebase
-// Concatenate query parameters to API query
-//AJAX Query Call
-// 5. Return results from API query to display in the DOM
-// Hook into contentDiv
-// Use jQuery to create DOM elements for API query results 
-// <img> tag for poster
-// <h> or <p> tag(s) for title, synopsis, etc.
