@@ -48,9 +48,14 @@
     certCountry = '&certification_country=US',
     cert = '&certification=',
     video = '&include_video=false',
+
+    // Made testURL for easier debugging //
+    testURL = 'https://api.themoviedb.org/3/discover/movie?api_key=2429acb131d788573608b3142e21e670&with_genres=28'
+    //----------------------------------//
+    
     tvQueryURL = 'https://api.themoviedb.org/3/discover/television' + apiKey + language + sort + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1'
 
-    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + searchAPILKey + language + sort + certCountry + cert + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1' 
+    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + apiKey + language + sort + certCountry + cert + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1' 
 
 
 // 1. Present user with choices
@@ -118,44 +123,50 @@ $(document.body).on("click", "#genre-choice", function() {
 })
 
 // Define tvQuery - the ajax call to The Movie Database API
-function tvQuery() {
-
-}
-function newMovie(queryURL) {
+function tvQuery(testURL) {
     $.ajax({
-        url: queryURL,
+        url: testURL,
         method: "GET"
     }).then(function (response) {
-
-        // 5. Return results from API query to display in the DOM
         console.log(response);
+    })
 
-        if (response.data.length > 0) {
-
-            for (i = 0; i < response.data.length; i++) {
-
-                //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
-                var img = $('<img>');
-                img.attr("src", response.results[i].poster_path);
-
-                //creates new divs for each image that comes through the response
-                newDiv = $("<div>");
-                newDiv.addClass("#"); //Adds "giphyBox" class to new image
-
-                //if response has no title this is how to handle
-                var title = response.results[i].title;
-                if (title === "") {
-                    title = response.results[i].name;
-                }
-                var overview = response.results[i].overview;
-
-                // Hook into contentDiv
-                newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
-                newDiv.prependTo('#'); //inserts to the DOM
-            }
-        }
-    });
 }
+// function newMovie(queryURL) {
+//     $.ajax({
+//         url: queryURL,
+//         method: "GET"
+//     }).then(function (response) {
+
+//         // 5. Return results from API query to display in the DOM
+//         console.log(response);
+
+//         if (response.data.length > 0) {
+
+//             for (i = 0; i < response.data.length; i++) {
+
+//                 //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
+//                 var img = $('<img>');
+//                 img.attr("src", response.results[i].poster_path);
+
+//                 //creates new divs for each image that comes through the response
+//                 newDiv = $("<div>");
+//                 newDiv.addClass("#"); //Adds "giphyBox" class to new image
+
+//                 //if response has no title this is how to handle
+//                 var title = response.results[i].title;
+//                 if (title === "") {
+//                     title = response.results[i].name;
+//                 }
+//                 var overview = response.results[i].overview;
+
+//                 // Hook into contentDiv
+//                 newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
+//                 newDiv.prependTo('#'); //inserts to the DOM
+//             }
+//         }
+//     });
+// }
 
 
 
