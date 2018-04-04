@@ -54,7 +54,7 @@ button {
 
 
 
-
+/* Image coding for Movie/TV Choice */
 
 .opt {
     padding: 10px;
@@ -72,3 +72,17 @@ button {
             transform: scale(0.95);
 }
 
+
+/* Button Coding for Rating Question */
+
+.buttonRating {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px;
+    padding: 20px;
+
+}
+.buttonRating:hover {
+    display:block;
+}
