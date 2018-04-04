@@ -34,7 +34,7 @@ h2 {
 .television {
     background-image:url("../images/TV.png");
     width:100%;
-    height: 600px;
+    height: 100%;
     margin-top: -10px;
     background-size:cover;
 }
@@ -44,5 +44,51 @@ h2 {
     padding: 20px;
 }
 .contentDiv {
-    border: 2px #000 solid;
+    height: 445px;
+    overflow: scroll;
+
+}
+button {
+    margin: 10px !important;
+}
+
+
+
+/* Image coding for Movie/TV Choice */
+
+.opt {
+    padding: 10px;
+    background-color: rgb(255, 255, 255, .0);
+    transition: transform .2s; /* Animation */
+    width: 200px;
+    height: 232px;
+    margin: 0 auto;
+}
+
+.opt:hover {
+    -webkit-filter: brightness(1.05) contrast(1.05);
+            filter: brightness(1.05) contrast(1.05);
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+}
+
+
+/* Button Coding for Rating Question */
+
+.buttonRating {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #556491;
+    color: #fff;
+    border: 2px black solid;
+
+}
+.buttonRating:hover {
+    display:inline;
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+    
 }
