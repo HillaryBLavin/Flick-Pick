@@ -53,9 +53,9 @@
     testURL = 'https://api.themoviedb.org/3/discover/movie?api_key=2429acb131d788573608b3142e21e670&language=en-US&sort_by=popularity.asc&certification_country=US&certification=R&include_video=false&with_genres=28'
     //----------------------------------//
     
-    tvQueryURL = 'https://api.themoviedb.org/3/discover/television' + apiKey + language + sort + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1'
+    tvQueryURL = 'https://api.themoviedb.org/3/discover/tv' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre
 
-    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + apiKey + language + sort + certCountry + cert + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1' 
+    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre
 
 
 // 1. Present user with choices
@@ -125,7 +125,7 @@ $(document.body).on("click", "#tv-genre-choice", function() {
 // Define tvQuery - the ajax call to The Movie Database API
 function tvQuery() {
     $.ajax({
-        url: testURL,
+        url: tvQueryURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
