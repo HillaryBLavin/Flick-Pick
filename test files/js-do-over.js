@@ -123,14 +123,13 @@ $(document.body).on("click", "#genre-choice", function() {
 })
 
 // Define tvQuery - the ajax call to The Movie Database API
-function tvQuery(testURL) {
+function tvQuery() {
     $.ajax({
         url: testURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
-    })
-
+    });
 }
 // function newMovie(queryURL) {
 //     $.ajax({
