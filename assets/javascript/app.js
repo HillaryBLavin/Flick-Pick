@@ -133,7 +133,7 @@ function tvQuery() {
         // Insert code for writing the results to the DOM here
         if (response.results.length > 0) {
 
-            for (i = 0; i < response.results.length; i++) {
+            for (i = 0; i < 3; i++) {
 
                 //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
                 var img = $('<img>');
@@ -213,7 +213,7 @@ function movieQuery() {
         // Insert code for writing the results to the DOM here
         if (response.results.length > 0) {
 
-            for (i = 0; i < response.results.length; i++) {
+            for (i = 0; i < 3; i++) {
 
                 //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
                 var img = $('<img>');
