@@ -124,12 +124,15 @@ $(document.body).on("click", "#tv-genre-choice", function() {
 
 // Define tvQuery - the ajax call to The Movie Database API
 function tvQuery() {
-    tvQueryURL = 'https://api.themoviedb.org/3/discover/tv' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre,
+    tvQueryURL = 'https://api.themoviedb.org/3/discover/tv' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre;
     $.ajax({
         url: tvQueryURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
+        // Insert code for writing the results to the DOM here
+        console.log(tvQueryURL);
+        resetApp();
     });
 }
 
@@ -178,11 +181,24 @@ $(document.body).on("click", "#movie-genre-choice", function() {
 
 // Define tvQuery - the ajax call to The Movie Database API
 function movieQuery() {
-    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre
+    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre;
     $.ajax({
         url: movieQueryURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
+        // Insert code for writing the results to the DOM here
+        console.log(movieQueryURL);
+        resetApp();
     });
+    
+    
+}
+
+function resetApp() {
+    userRating = '',
+    userGenre = '',
+    tvQueryURL = '',
+    movieQueryURL = '';
+
 }
