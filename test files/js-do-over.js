@@ -50,7 +50,7 @@
     video = '&include_video=false',
 
     // Made testURL for easier debugging //
-    testURL = 'https://api.themoviedb.org/3/discover/movie?api_key=2429acb131d788573608b3142e21e670&with_genres=28'
+    testURL = 'https://api.themoviedb.org/3/discover/movie?api_key=2429acb131d788573608b3142e21e670&language=en-US&sort_by=popularity.asc&certification_country=US&certification=R&include_video=false&with_genres=28'
     //----------------------------------//
     
     tvQueryURL = 'https://api.themoviedb.org/3/discover/television' + apiKey + language + sort + '&with_genres=' + userGenre + '&include_adult=false&include_video=false&page=1'
