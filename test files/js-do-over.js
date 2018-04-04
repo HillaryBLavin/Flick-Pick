@@ -132,12 +132,6 @@ function tvQuery() {
     });
 }
 
-
-
-
-
-
-
 // MOVIE LOGIC
 // On-click even for "Movie"
 $(document.body).on("click", "#choice2", function() {
@@ -146,4 +140,47 @@ $(document.body).on("click", "#choice2", function() {
     $("#answerList").empty();
     movieRatingsChoice();
 })
+// Define movieRatingsChoice - this will display Movie Ratings options
+function movieRatingsChoice() {
+    // Display first question in movieQuestions
+    $("#question").html("<h4>" + movieQuestions[0].question + "</h4>");
+    // Display choices using for-loop
+    for (i = 0; i < movieQuestions[0].options.length; i++) {
+        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='rating-choice' data-value='" + movieQuestions[0].valuesID[i] + "'>" + movieQuestions[0].options[i] + "</button>");
+    }
+}
+// Create on-click event for when user selets a rating
+$(document.body).on("click", "#rating-choice", function() {
+    userRating = $(this).data("value");
+    console.log(userRating);
+    $("#question").empty();
+    $("#answerList").empty();
+    movieGenreChoice();
+})
+// Define tvGenreChoice - this will display Movie genre options
+function movieGenreChoice() {
+    // Display second question in movieQuestions
+    $("#question").html("<h4>" + tvQuestions[1].question + "</h4>");
+    // Display choices using for-loop
+    for (i = 0; i < movieQuestions[1].options.length; i++) {
+        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='genre-choice' data-value='" + movieQuestions[1].valuesID[i] + "'>" + movieQuestions[1].options[i] + "</button>");
+    }
+}
+// Create on-click event for when user selets a genre
+$(document.body).on("click", "#genre-choice", function() {
+    userGenre = $(this).data("value");
+    console.log(userGenre);
+    $("#question").empty();
+    $("#answerList").empty();
+    movieQuery();
+})
 
+// Define tvQuery - the ajax call to The Movie Database API
+function movieQuery() {
+    $.ajax({
+        url: testURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+    });
+}
