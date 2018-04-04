@@ -92,3 +92,7 @@ button {
     transform: scale(0.95);
     
 }
+
+.page-footer {
+    margin-top: 10px;
+}
