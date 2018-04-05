@@ -42,6 +42,7 @@
     // Initialize global variables for the user's choice of rating and genre, to be used later for API query
     userRating = '',
     userGenre = '',
+    // Variables for the rest of the query parameters
     apiKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
     sort = '&sort_by=popularity.desc', //string term set sort option
@@ -49,11 +50,11 @@
     cert = '&certification=',
     video = '&include_video=false',
 
-    // Made testURL for easier debugging //
+    // testURL for quick debugging //
     testURL = 'https://api.themoviedb.org/3/discover/movie?api_key=2429acb131d788573608b3142e21e670&language=en-US&sort_by=popularity.asc&certification_country=US&certification=R&include_video=false&with_genres=28'
     //----------------------------------//
     
-
+    // Empty global variables to be defined based on user choices and used for API queries
     tvQueryURL = '',
     movieQueryURL = '',
     movieTitle = [],
