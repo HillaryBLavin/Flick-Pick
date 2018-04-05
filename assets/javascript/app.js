@@ -194,7 +194,7 @@ $(document.body).on("click", "#movie-rating-choice", function() {
     $("#answerList").empty();
     movieGenreChoice();
 })
-// Define tvGenreChoice - this will display Movie genre options
+// Define movieGenreChoice - this will display Movie genre options
 function movieGenreChoice() {
     // Display second question in movieQuestions
     $("#question").html("<h4>" + tvQuestions[1].question + "</h4>");
@@ -214,7 +214,7 @@ $(document.body).on("click", "#movie-genre-choice", function() {
 
 
 
-// Define tvQuery - the ajax call to The Movie Database API
+// Define movieQuery - the ajax call to The Movie Database API
 function movieQuery() {
     movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre;
     $.ajax({
