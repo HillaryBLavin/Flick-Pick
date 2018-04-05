@@ -202,6 +202,8 @@ $(document.body).on("click", "#movie-genre-choice", function() {
     movieQuery();
 })
 
+
+
 // Define tvQuery - the ajax call to The Movie Database API
 function movieQuery() {
     movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre;
@@ -212,15 +214,22 @@ function movieQuery() {
         console.log(response);
         // Insert code for writing the results to the DOM here
         if (response.results.length > 0) {
-
+              
+            newDiv = $("<div>");
+            newDiv.addClass("carousel");
             for (i = 0; i < 3; i++) {
+
+                //creates new divs for each image that comes through the response
+                
+                
 
                 //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
                 var img = $('<img>');
-                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path);
-
-                //creates new divs for each image that comes through the response
-                newDiv = $("<div>");
+                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path)
+                img.attr("class", 'carousel-item');
+                img.appendTo(newDiv);
+            
+                newDiv.appendTo('#recommendation');
                 //newDiv.addClass("#"); //Adds "giphyBox" class to new image
 
                 //if response has no title this is how to handle
@@ -228,10 +237,15 @@ function movieQuery() {
                 var overview = response.results[i].overview;
 
                 // Hook into contentDiv
-                newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
-                newDiv.prependTo('#answerList'); //inserts to the DOM
+                // newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
+                // newDiv.appendTo('.carousel'); //inserts to the DOM
+
+
             }
+
+            $('.carousel').carousel();
         }
+
         console.log(movieQueryURL);
         resetApp();
 
@@ -246,5 +260,6 @@ function resetApp() {
     userGenre = '',
     tvQueryURL = '',
     movieQueryURL = '';
+  
 
 }
