@@ -16,7 +16,7 @@
     tvQuestions = [
         { // TV Ratings Choices
             question: "Who's watching? Pick a rating!", // What is the rating you want?
-            options: ['TV-Y: Programs designed to be appropriate for all children.', 'TV-Y7: Programs designed for children ages 7 and above.', 'TV-G: Program most parents would find suitable for all ages.', 'TV-PG: Programs containing materials that parents may find unsuitable for younger children.', 'TV-14: Programs containing some material is unsuitable for children under 14 years of age.', 'TV-MA: Programs specifically designed to be viewed by adults and unsuitable for children under 17.'],
+            options: ['Programs designed to be appropriate for all children.', 'Programs designed for children ages 7 and above.', 'Program most parents would find suitable for all ages.', 'Programs containing materials that parents may find unsuitable for younger children.', 'Programs containing some material is unsuitable for children under 14 years of age.', 'Programs specifically designed to be viewed by adults and unsuitable for children under 17.'],
             valuesID: ['TV-Y', 'TV-Y7', 'TV-G', 'TV-PG', 'TV-14', 'TV-MA']
         },
         { //TV Genres
@@ -92,8 +92,8 @@ function tvRatingsChoice() {
     // Display first question in tvQuestions
     $("#question").html("<h4>" + tvQuestions[0].question + "</h4>");
     // Display choices using for-loop
-    for (i = 0; i < tvQuestions[0].options.length; i++) {
-        $("#answerList").append("<button class='buttonRating' id='tv-rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
+    for (i = 0; i < tvQuestions[0].valuesID.length; i++) {
+        $("#answerList").append("<button class='buttonRating' id='tv-rating-choice' title='" + tvQuestions[0].options[i] + "' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].valuesID[i] + "</button>");
     }
 }
 // Create on-click event for when user selets a rating
