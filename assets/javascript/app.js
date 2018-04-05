@@ -140,33 +140,62 @@ function tvQuery() {
         console.log(response);
         // Insert code for writing the results to the DOM here
         if (response.results.length > 0) {
-
+            // Create a new div
+            newDiv = $("<div>");
+            // Add .carousel (per Materialize Carousel documentation)
+            newDiv.addClass("carousel");
             for (i = 0; i < 3; i++) {
-
-                //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
-                var img = $('<img>');
-                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path);
-
-                //creates new divs for each image that comes through the response
-                newDiv = $("<div>");
-                //newDiv.addClass("#"); //Adds "giphyBox" class to new image
-
-                //if response has no title this is how to handle
+                // This will handle the situation if response has no title
                 var title = response.results[i].name;
                 var overview = response.results[i].overview;
-
-                // Hook into contentDiv
-                newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
-                newDiv.prependTo('#answerList'); //inserts to the DOM
-
-                // Add 
+                // Create an image tag for each of the first three results from the ajax call
+                var img = $('<img>');
+                // Add the poster as the src
+                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path)
+                // Add .carousel-item (per Materialize Carousel documentation)
+                img.attr("class", 'carousel-item');
+                // Add id for use in on-click event 
+                img.attr("id", "tvshow-" + (i+1));
+                // Add data-value for title
+                img.data("title", title);
+                //Add data-value for overview
+                img.data("synopsis", overview);
+                // Append image to the new div
+                img.appendTo(newDiv);
+                // Append new div to #recommendation
+                newDiv.appendTo('#recommendation');
+                tvTitle.push(title);
+                tvSynopsis.push(overview);
             }
+
+            $('.carousel').carousel();
         }
+
         console.log(tvQueryURL);
-        resetApp();
+        $(document.body).on("click", "#tvshow-1", function() {
+            $("#recommendation").empty();
+            // Hook into contentDiv
+            // Adds title and overview to DOM 
+            $("#recommendation").html("<h4>" + tvTitle[0] + "</h4><p>" + tvSynopsis[0] + "</p>")
+        });
+        $(document.body).on("click", "#tvshow-2", function() {
+            $("#recommendation").empty();
+            // Hook into contentDiv
+            // Adds title and overview to DOM 
+            $("#recommendation").html("<h4>" + tvTitle[1] + "</h4><p>" + tvSynopsis[1] + "</p>")
+        });
+        $(document.body).on("click", "#tvshow-3", function() {
+            $("#recommendation").empty();
+            // Hook into contentDiv
+            // Adds title and overview to DOM 
+            $("#recommendation").html("<h4>" + tvTitle[2] + "</h4><p>" + tvSynopsis[2] + "</p>")
+        });
+        resetGlobals();
 
 
     });
+    
+    
 }
 
 // MOVIE LOGIC
@@ -258,21 +287,18 @@ function movieQuery() {
         console.log(movieQueryURL);
         $(document.body).on("click", "#movie-1", function() {
             $("#recommendation").empty();
-            console.log("butt1");
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + movieSynopsis[0] + "</p>")
         });
         $(document.body).on("click", "#movie-2", function() {
             $("#recommendation").empty();
-            console.log("butt1");
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + movieSynopsis[1] + "</p>")
         });
         $(document.body).on("click", "#movie-3", function() {
             $("#recommendation").empty();
-            console.log("butt1");
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + movieSynopsis[2] + "</p>")
