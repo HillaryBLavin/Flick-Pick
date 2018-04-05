@@ -67,7 +67,7 @@
 // Start Button on-click event - starts the app
 $('#startBtn').on('click', function () {
     // When start button is clicked, the button is hidden, and ...
-    $(this).hide();
+    $("#start").hide();
     // chooseScreen function begins
     chooseScreen();
 });
