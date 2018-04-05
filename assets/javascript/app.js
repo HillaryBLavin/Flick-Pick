@@ -55,7 +55,11 @@
     
 
     tvQueryURL = '',
-    movieQueryURL = '';
+    movieQueryURL = '',
+    movieTitle = [],
+    tvTitle = [],
+    movieSynopsis = [],
+    tvSynopsis = [];
 
 
 // 1. Present user with choices
@@ -96,6 +100,9 @@ function tvRatingsChoice() {
         $("#answerList").append("<button class='buttonRating' id='tv-rating-choice' title='" + tvQuestions[0].options[i] + "' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].valuesID[i] + "</button>");
     }
 }
+
+// ------------------------ TV SECTION NOT FULLY FUNCTIONAL ---------------------------\\
+// ------------ NEEDS CAROUSEL AND FINAL RECOMMENDATION ON-CLICK FUNCTIONS ------------\\
 // Create on-click event for when user selets a rating
 $(document.body).on("click", "#tv-rating-choice", function() {
     userRating = $(this).data("value");
@@ -150,6 +157,8 @@ function tvQuery() {
                 // Hook into contentDiv
                 newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
                 newDiv.prependTo('#answerList'); //inserts to the DOM
+
+                // Add 
             }
         }
         console.log(tvQueryURL);
@@ -214,40 +223,60 @@ function movieQuery() {
         console.log(response);
         // Insert code for writing the results to the DOM here
         if (response.results.length > 0) {
-              
+            // Create a new div
             newDiv = $("<div>");
+            // Add .carousel (per Materialize Carousel documentation)
             newDiv.addClass("carousel");
             for (i = 0; i < 3; i++) {
-
-                //creates new divs for each image that comes through the response
-                
-                
-
-                //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
-                var img = $('<img>');
-                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path)
-                img.attr("class", 'carousel-item');
-                img.appendTo(newDiv);
-            
-                newDiv.appendTo('#recommendation');
-                //newDiv.addClass("#"); //Adds "giphyBox" class to new image
-
-                //if response has no title this is how to handle
+                // This will handle the situation if response has no title
                 var title = response.results[i].title;
                 var overview = response.results[i].overview;
-
-                // Hook into contentDiv
-                // newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
-                // newDiv.appendTo('.carousel'); //inserts to the DOM
-
-
+                // Create an image tag for each of the first three results from the ajax call
+                var img = $('<img>');
+                // Add the poster as the src
+                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path)
+                // Add .carousel-item (per Materialize Carousel documentation)
+                img.attr("class", 'carousel-item');
+                // Add id for use in on-click event 
+                img.attr("id", "movie-" + (i+1));
+                // Add data-value for title
+                img.data("title", title);
+                //Add data-value for overview
+                img.data("synopsis", overview);
+                // Append image to the new div
+                img.appendTo(newDiv);
+                // Append new div to #recommendation
+                newDiv.appendTo('#recommendation');
+                movieTitle.push(title);
+                movieSynopsis.push(overview);
             }
 
             $('.carousel').carousel();
         }
 
         console.log(movieQueryURL);
-        resetApp();
+        $(document.body).on("click", "#movie-1", function() {
+            $("#recommendation").empty();
+            console.log("butt1");
+            // Hook into contentDiv
+            // Adds title and overview to DOM 
+            $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + overview + "</p>")
+        });
+        $(document.body).on("click", "#movie-2", function() {
+            $("#recommendation").empty();
+            console.log("butt1");
+            // Hook into contentDiv
+            // Adds title and overview to DOM 
+            $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + overview + "</p>")
+        });
+        $(document.body).on("click", "#movie-3", function() {
+            $("#recommendation").empty();
+            console.log("butt1");
+            // Hook into contentDiv
+            // Adds title and overview to DOM 
+            $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + overview + "</p>")
+        });
+        resetGlobals();
 
 
     });
@@ -255,7 +284,9 @@ function movieQuery() {
     
 }
 
-function resetApp() {
+
+
+function resetGlobals() {
     userRating = '',
     userGenre = '',
     tvQueryURL = '',
