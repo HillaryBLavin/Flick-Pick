@@ -141,9 +141,13 @@ function tvQuery() {
         // Insert code for writing the results to the DOM here
         if (response.results.length > 0) {
             // Create a new div
+            finalRecDiv = $("<div>"); // Create a new div
+            finalRecDiv.html("<h4>How about one of these?</h4>"); // Add text
+            clickPoster = $("<div>"); // Create a new div
+            clickPoster.html("<p>Click the poster for more info!</p>"); // Add text
             newDiv = $("<div>");
             // Add .carousel (per Materialize Carousel documentation)
-            newDiv.addClass("carousel");
+            newDiv.addClass("carousel carousel-slider center");
             for (i = 0; i < 3; i++) {
                 // This will handle the situation if response has no title
                 var title = response.results[i].name;
@@ -162,8 +166,11 @@ function tvQuery() {
                 img.data("synopsis", overview);
                 // Append image to the new div
                 img.appendTo(newDiv);
-                // Append new div to #recommendation
+                // Append new divs to #recommendation
+                finalRecDiv.appendTo('#recommendation');
                 newDiv.appendTo('#recommendation');
+                clickPoster.appendTo('#recommendation');
+                // Store Movie Title and Synopsis to global variables to display on-click
                 tvTitle.push(title);
                 tvSynopsis.push(overview);
             }
@@ -252,11 +259,15 @@ function movieQuery() {
     }).then(function (response) {
         console.log(response);
         // Insert code for writing the results to the DOM here
+        finalRecDiv = $("<div>"); // Create a new div
+        finalRecDiv.html("<h4>How about one of these?</h4>"); // Add text
+        clickPoster = $("<div>"); // Create a new div
+        clickPoster.html("<p>Click the poster for more info!</p>"); // Add text
         if (response.results.length > 0) {
             // Create a new div
             newDiv = $("<div>");
             // Add .carousel (per Materialize Carousel documentation)
-            newDiv.addClass("carousel");
+            newDiv.addClass("carousel carousel-slider center");
             for (i = 0; i < 3; i++) {
                 // This will handle the situation if response has no title
                 var title = response.results[i].title;
@@ -275,8 +286,11 @@ function movieQuery() {
                 img.data("synopsis", overview);
                 // Append image to the new div
                 img.appendTo(newDiv);
-                // Append new div to #recommendation
+                // Append new divs to #recommendation
+                finalRecDiv.appendTo('#recommendation');
                 newDiv.appendTo('#recommendation');
+                clickPoster.appendTo('#recommendation');
+                // Store Movie Title and Synopsis to global variables to display on-click
                 movieTitle.push(title);
                 movieSynopsis.push(overview);
             }
@@ -284,7 +298,6 @@ function movieQuery() {
             $('.carousel').carousel();
         }
 
-        console.log(movieQueryURL);
         $(document.body).on("click", "#movie-1", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
@@ -312,7 +325,7 @@ function movieQuery() {
 }
 
 
-
+// Reset global variables
 function resetGlobals() {
     userRating = '',
     userGenre = '',
