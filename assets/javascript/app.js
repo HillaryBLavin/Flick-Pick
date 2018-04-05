@@ -214,21 +214,22 @@ function movieQuery() {
         console.log(response);
         // Insert code for writing the results to the DOM here
         if (response.results.length > 0) {
-              
+            // Create a new div
             newDiv = $("<div>");
+            // Add .carousel (per Materialize Carousel documentation)
             newDiv.addClass("carousel");
             for (i = 0; i < 3; i++) {
-
-                //creates new divs for each image that comes through the response
-                
-                
-
-                //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
+                // Create an image tag for each of the first three results from the ajax call
                 var img = $('<img>');
+                // Add the poster as the src
                 img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path)
+                // Add .carousel-item (per Materialize Carousel documentation)
                 img.attr("class", 'carousel-item');
+                // Add id for use in on-click event 
+                img.attr("id", "movie-" + (i+1));
+                // Append image to the new div
                 img.appendTo(newDiv);
-            
+                // Append new div to #recommendation
                 newDiv.appendTo('#recommendation');
                 //newDiv.addClass("#"); //Adds "giphyBox" class to new image
 
@@ -247,7 +248,7 @@ function movieQuery() {
         }
 
         console.log(movieQueryURL);
-        resetApp();
+        // resetApp();
 
 
     });
