@@ -261,21 +261,21 @@ function movieQuery() {
             console.log("butt1");
             // Hook into contentDiv
             // Adds title and overview to DOM 
-            $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + overview + "</p>")
+            $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + movieSynopsis[0] + "</p>")
         });
         $(document.body).on("click", "#movie-2", function() {
             $("#recommendation").empty();
             console.log("butt1");
             // Hook into contentDiv
             // Adds title and overview to DOM 
-            $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + overview + "</p>")
+            $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + movieSynopsis[1] + "</p>")
         });
         $(document.body).on("click", "#movie-3", function() {
             $("#recommendation").empty();
             console.log("butt1");
             // Hook into contentDiv
             // Adds title and overview to DOM 
-            $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + overview + "</p>")
+            $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + movieSynopsis[2] + "</p>")
         });
         resetGlobals();
 
