@@ -182,19 +182,27 @@ function tvQuery() {
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[0] + "</h4><p>" + tvSynopsis[0] + "</p>");
-            
+            $.getJSON("https://itunes.apple.com/search?kind=tv-show&term=" + tvTitle[0], function (result) {
+                console.log(result.results[0].previewUrl);
+            });
         });
         $(document.body).on("click", "#tvshow-2", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[1] + "</h4><p>" + tvSynopsis[1] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?kind=tv-show&term=" + tvTitle[1], function (result) {
+                console.log(result.results[1].previewUrl);
+            });
         });
         $(document.body).on("click", "#tvshow-3", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[2] + "</h4><p>" + tvSynopsis[2] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?kind=tv-show&term=" + tvTitle[2], function (result) {
+                console.log(result.results[2].previewUrl);
+            });
         });
     
         resetGlobals();
@@ -303,7 +311,7 @@ function movieQuery() {
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + movieSynopsis[0] + "</p>");
-            $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[0], function (result) {
+            $.getJSON("https://itunes.apple.com/search?kind=feature-movie&term=" + movieTitle[0], function (result) {
                 console.log(result);
             });
             
@@ -313,7 +321,7 @@ function movieQuery() {
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + movieSynopsis[1] + "</p>");
-            $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[1], function (result) {
+            $.getJSON("https://itunes.apple.com/search?kind=feature-movie&term=" + movieTitle[1], function (result) {
                 console.log(result);
             });
         });
@@ -322,9 +330,9 @@ function movieQuery() {
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + movieSynopsis[2] + "</p>");
-            $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[2], function (result) {
-                console.log(result);
-            });
+            $.getJSON("https://itunes.apple.com/search?kind=feature-movie&term=" + movieTitle[2], function (result) {
+                console.log(result.results[0].previewUrl);
+            })
         });
         resetGlobals();
 
@@ -359,15 +367,15 @@ function resetGlobals() {
 //     })
 // }
 
-// function calliTunesMovie() {
-//     $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[i], function (result) {
-//         if (result.results.length > 0) { //Runs if array returns a result
-//             if (result.results[i].kind === "feature-movie") {
-//                 //displays results in the DOM 
-//                 // $('body').append(result.results[i].previewUrl + '<br>')
-//                 console.log(result.results[i].previewURL);
+function calliTunesMovie() {
+    $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[i], function (result) {
+        if (result.results.length > 0) { //Runs if array returns a result
+            if (result.results[i].kind === "feature-movie") {
+                //displays results in the DOM 
+                // $('body').append(result.results[i].previewUrl + '<br>')
+                console.log(result.results[i].previewURL);
 
-//             }
-//         }
-//     })
-// }
+            }
+        }
+    })
+}
