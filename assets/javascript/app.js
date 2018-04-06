@@ -234,7 +234,7 @@ $(document.body).on("click", "#movie-rating-choice", function() {
 // Define movieGenreChoice - this will display Movie genre options
 function movieGenreChoice() {
     // Display second question in movieQuestions
-    $("#question").html("<h4>" + tvQuestions[1].question + "</h4>");
+    $("#question").html("<h4>" + movieQuestions[1].question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < movieQuestions[1].options.length; i++) {
         $("#answerList").append("<button class='waves-effect waves-light btn-large' id='movie-genre-choice' data-value='" + movieQuestions[1].valuesID[i] + "'>" + movieQuestions[1].options[i] + "</button>");
