@@ -183,20 +183,21 @@ function tvQuery() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
-            $("#recommendation").html("<h4>" + tvTitle[0] + "</h4><p>" + tvSynopsis[0] + "</p>")
+            $("#recommendation").html("<h4>" + tvTitle[0] + "</h4><p>" + tvSynopsis[0] + "</p>");
         });
         $(document.body).on("click", "#tvshow-2", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
-            $("#recommendation").html("<h4>" + tvTitle[1] + "</h4><p>" + tvSynopsis[1] + "</p>")
+            $("#recommendation").html("<h4>" + tvTitle[1] + "</h4><p>" + tvSynopsis[1] + "</p>");
         });
         $(document.body).on("click", "#tvshow-3", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
-            $("#recommendation").html("<h4>" + tvTitle[2] + "</h4><p>" + tvSynopsis[2] + "</p>")
+            $("#recommendation").html("<h4>" + tvTitle[2] + "</h4><p>" + tvSynopsis[2] + "</p>");
         });
+    
         resetGlobals();
 
 
@@ -302,19 +303,19 @@ function movieQuery() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
-            $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + movieSynopsis[0] + "</p>")
+            $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + movieSynopsis[0] + "</p>");
         });
         $(document.body).on("click", "#movie-2", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
-            $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + movieSynopsis[1] + "</p>")
+            $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + movieSynopsis[1] + "</p>");
         });
         $(document.body).on("click", "#movie-3", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
-            $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + movieSynopsis[2] + "</p>")
+            $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + movieSynopsis[2] + "</p>");
         });
         resetGlobals();
 
@@ -334,3 +335,30 @@ function resetGlobals() {
   
 
 }
+
+
+// function calliTunesTV() {
+//     $.getJSON("https://itunes.apple.com/search?term=" + tvTitle[i], function (result) {
+//         if (result.results.length > 0) { //Runs if array returns a result
+//             if (result.results[i].kind === "tv-episode") {
+//                 //displays results in the DOM 
+//                 // $('body').append(result.results[i].previewUrl + '<br>')
+//                 console.log(result.results[i].previewURL);
+
+//             }
+//         }
+//     })
+// }
+
+// function calliTunesMovie() {
+//     $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[i], function (result) {
+//         if (result.results.length > 0) { //Runs if array returns a result
+//             if (result.results[i].kind === "feature-movie") {
+//                 //displays results in the DOM 
+//                 // $('body').append(result.results[i].previewUrl + '<br>')
+//                 console.log(result.results[i].previewURL);
+
+//             }
+//         }
+//     })
+// }
