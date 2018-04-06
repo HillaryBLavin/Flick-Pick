@@ -304,14 +304,7 @@ function movieQuery() {
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + movieSynopsis[0] + "</p>");
             $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[0], function (result) {
-                if (result.results.length > 0) { //Runs if array returns a result
-                    if (result.results[i].kind === "feature-movie") {
-                        //displays results in the DOM 
-                        // $('body').append(result.results[i].previewUrl + '<br>')
-                        console.log(result.results[i].previewURL);
-        
-                    }
-                }
+                console.log(result);
             });
             
         });
@@ -321,14 +314,7 @@ function movieQuery() {
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + movieSynopsis[1] + "</p>");
             $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[1], function (result) {
-                if (result.results.length > 0) { //Runs if array returns a result
-                    if (result.results[i].kind === "feature-movie") {
-                        //displays results in the DOM 
-                        // $('body').append(result.results[i].previewUrl + '<br>')
-                        console.log(result.results[i].previewURL);
-        
-                    }
-                }
+                console.log(result);
             });
         });
         $(document.body).on("click", "#movie-3", function() {
@@ -337,14 +323,7 @@ function movieQuery() {
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + movieSynopsis[2] + "</p>");
             $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[2], function (result) {
-                if (result.results.length > 0) { //Runs if array returns a result
-                    if (result.results[i].kind === "feature-movie") {
-                        //displays results in the DOM 
-                        // $('body').append(result.results[i].previewUrl + '<br>')
-                        console.log(result.results[i].previewURL);
-        
-                    }
-                }
+                console.log(result);
             });
         });
         resetGlobals();
