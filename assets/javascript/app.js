@@ -102,8 +102,6 @@ function tvRatingsChoice() {
     }
 }
 
-// ------------------------ TV SECTION NOT FULLY FUNCTIONAL ---------------------------\\
-// ------------ NEEDS CAROUSEL AND FINAL RECOMMENDATION ON-CLICK FUNCTIONS ------------\\
 // Create on-click event for when user selets a rating
 $(document.body).on("click", "#tv-rating-choice", function() {
     userRating = $(this).data("value");
@@ -184,6 +182,7 @@ function tvQuery() {
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[0] + "</h4><p>" + tvSynopsis[0] + "</p>");
+            
         });
         $(document.body).on("click", "#tvshow-2", function() {
             $("#recommendation").empty();
@@ -234,7 +233,7 @@ $(document.body).on("click", "#movie-rating-choice", function() {
 // Define movieGenreChoice - this will display Movie genre options
 function movieGenreChoice() {
     // Display second question in movieQuestions
-    $("#question").html("<h4>" + tvQuestions[1].question + "</h4>");
+    $("#question").html("<h4>" + movieQuestions[1].question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < movieQuestions[1].options.length; i++) {
         $("#answerList").append("<button class='waves-effect waves-light btn-large' id='movie-genre-choice' data-value='" + movieQuestions[1].valuesID[i] + "'>" + movieQuestions[1].options[i] + "</button>");
@@ -304,18 +303,49 @@ function movieQuery() {
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + movieSynopsis[0] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[0], function (result) {
+                if (result.results.length > 0) { //Runs if array returns a result
+                    if (result.results[i].kind === "feature-movie") {
+                        //displays results in the DOM 
+                        // $('body').append(result.results[i].previewUrl + '<br>')
+                        console.log(result.results[i].previewURL);
+        
+                    }
+                }
+            });
+            
         });
         $(document.body).on("click", "#movie-2", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + movieSynopsis[1] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[1], function (result) {
+                if (result.results.length > 0) { //Runs if array returns a result
+                    if (result.results[i].kind === "feature-movie") {
+                        //displays results in the DOM 
+                        // $('body').append(result.results[i].previewUrl + '<br>')
+                        console.log(result.results[i].previewURL);
+        
+                    }
+                }
+            });
         });
         $(document.body).on("click", "#movie-3", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + movieSynopsis[2] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?term=" + movieTitle[2], function (result) {
+                if (result.results.length > 0) { //Runs if array returns a result
+                    if (result.results[i].kind === "feature-movie") {
+                        //displays results in the DOM 
+                        // $('body').append(result.results[i].previewUrl + '<br>')
+                        console.log(result.results[i].previewURL);
+        
+                    }
+                }
+            });
         });
         resetGlobals();
 
