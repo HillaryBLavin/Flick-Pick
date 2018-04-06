@@ -10,13 +10,13 @@
     // screenTypeOption - an object that holds the intial question and two possible answers
     var screenTypeOption = {
         question: "Do you want to watch a TV Show or a Movie?",
-        options: ['TV Show', 'Movie']
+        options: ['<img src="../assets/images/TVshow.png" class="opt" alt="TV Show"', '<img src="../assets/images/MOVie.png" class="opt" alt="Movie">']
     },
     // tvQuestions - an array that holds the tv questions and their possible answers
     tvQuestions = [
         { // TV Ratings Choices
             question: "Who's watching? Pick a rating!", // What is the rating you want?
-            options: ['TV-Y: Programs designed to be appropriate for all children.', 'TV-Y7: Programs designed for children ages 7 and above.', 'TV-G: Program most parents would find suitable for all ages.', 'TV-PG: Programs containing materials that parents may find unsuitable for younger children.', 'TV-14: Programs containing some material is unsuitable for children under 14 years of age.', 'TV-MA: Programs specifically designed to be viewed by adults and unsuitable for children under 17.'],
+            options: ['Programs designed to be appropriate for all children.', 'Programs designed for children ages 7 and above.', 'Program most parents would find suitable for all ages.', 'Programs containing materials that parents may find unsuitable for younger children.', 'Programs containing some material is unsuitable for children under 14 years of age.', 'Programs specifically designed to be viewed by adults and unsuitable for children under 17.'],
             valuesID: ['TV-Y', 'TV-Y7', 'TV-G', 'TV-PG', 'TV-14', 'TV-MA']
         },
         { //TV Genres
@@ -44,7 +44,7 @@
     userGenre = '',
     apiKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
     language = '&language=en-US', //string term to set english language movies
-    sort = '&sort_by=popularity.asc', //string term set sort option
+    sort = '&sort_by=popularity.desc', //string term set sort option
     certCountry = '&certification_country=US',
     cert = '&certification=',
     video = '&include_video=false',
@@ -55,7 +55,11 @@
     
 
     tvQueryURL = '',
-    movieQueryURL = '';
+    movieQueryURL = '',
+    movieTitle = [],
+    tvTitle = [],
+    movieSynopsis = [],
+    tvSynopsis = [];
 
 
 // 1. Present user with choices
@@ -73,7 +77,7 @@ function chooseScreen() {
     $("#question").html("<h4>" + screenTypeOption.question + "</h4>");
     // Display choices using for-loop
     for (i = 0; i < screenTypeOption.options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='choice" + (i+1) + "'>" + screenTypeOption.options[i] + "</button>");
+        $("#answerList").append("<class='firstChoice' id='choice" + (i+1) + "'>" + screenTypeOption.options[i] + "</>");
     }
 }
 
@@ -92,10 +96,13 @@ function tvRatingsChoice() {
     // Display first question in tvQuestions
     $("#question").html("<h4>" + tvQuestions[0].question + "</h4>");
     // Display choices using for-loop
-    for (i = 0; i < tvQuestions[0].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='tv-rating-choice' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].options[i] + "</button>");
+    for (i = 0; i < tvQuestions[0].valuesID.length; i++) {
+        $("#answerList").append("<button class='buttonRating' id='tv-rating-choice' title='" + tvQuestions[0].options[i] + "' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].valuesID[i] + "</button>");
     }
 }
+
+// ------------------------ TV SECTION NOT FULLY FUNCTIONAL ---------------------------\\
+// ------------ NEEDS CAROUSEL AND FINAL RECOMMENDATION ON-CLICK FUNCTIONS ------------\\
 // Create on-click event for when user selets a rating
 $(document.body).on("click", "#tv-rating-choice", function() {
     userRating = $(this).data("value");
@@ -124,16 +131,16 @@ $(document.body).on("click", "#tv-genre-choice", function() {
 
 // Define tvQuery - the ajax call to The Movie Database API
 function tvQuery() {
-    tvQueryURL = 'https://api.themoviedb.org/3/discover/tv' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre,
+    tvQueryURL = 'https://api.themoviedb.org/3/discover/tv' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre;
     $.ajax({
         url: tvQueryURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
-
+        // Insert code for writing the results to the DOM here
         if (response.results.length > 0) {
 
-            for (i = 0; i < response.results.length; i++) {
+            for (i = 0; i < 3; i++) {
 
                 //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
                 var img = $('<img>');
@@ -141,7 +148,7 @@ function tvQuery() {
 
                 //creates new divs for each image that comes through the response
                 newDiv = $("<div>");
-                newDiv.addClass("#"); //Adds "giphyBox" class to new image
+                //newDiv.addClass("#"); //Adds "giphyBox" class to new image
 
                 //if response has no title this is how to handle
                 var title = response.results[i].name;
@@ -149,9 +156,15 @@ function tvQuery() {
 
                 // Hook into contentDiv
                 newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
-                newDiv.prependTo('#'); //inserts to the DOM
+                newDiv.prependTo('#answerList'); //inserts to the DOM
+
+                // Add 
             }
         }
+        console.log(tvQueryURL);
+        resetApp();
+
+
     });
 }
 
@@ -198,66 +211,86 @@ $(document.body).on("click", "#movie-genre-choice", function() {
     movieQuery();
 })
 
+
+
 // Define tvQuery - the ajax call to The Movie Database API
 function movieQuery() {
-    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre
+    movieQueryURL = 'https://api.themoviedb.org/3/discover/movie' + apiKey + language + sort + certCountry + cert + userRating + '&include_adult=false' + video + '&page=1&with_genres=' + userGenre;
     $.ajax({
         url: movieQueryURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
-
+        // Insert code for writing the results to the DOM here
         if (response.results.length > 0) {
-
-            for (i = 0; i < response.results.length; i++) {
-
-                //build imgs, use src as still image, add attr for data-still, data-animate, data-state (still or animated)
-                var img = $('<img>');
-                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path);
-
-                //creates new divs for each image that comes through the response
-                newDiv = $("<div>");
-                newDiv.addClass("#"); //Adds "giphyBox" class to new image
-
-                //if response has no title this is how to handle
+            // Create a new div
+            newDiv = $("<div>");
+            // Add .carousel (per Materialize Carousel documentation)
+            newDiv.addClass("carousel");
+            for (i = 0; i < 3; i++) {
+                // This will handle the situation if response has no title
                 var title = response.results[i].title;
                 var overview = response.results[i].overview;
-
-                // Hook into contentDiv
-                newDiv.html("<p>Title: " + title + "</p><p>Overview: " + overview + "</p>").append(img); //Adds movie or tv title and overview to DOM along with image
-                newDiv.prependTo('#'); //inserts to the DOM
+                // Create an image tag for each of the first three results from the ajax call
+                var img = $('<img>');
+                // Add the poster as the src
+                img.attr("src", 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[i].poster_path)
+                // Add .carousel-item (per Materialize Carousel documentation)
+                img.attr("class", 'carousel-item');
+                // Add id for use in on-click event 
+                img.attr("id", "movie-" + (i+1));
+                // Add data-value for title
+                img.data("title", title);
+                //Add data-value for overview
+                img.data("synopsis", overview);
+                // Append image to the new div
+                img.appendTo(newDiv);
+                // Append new div to #recommendation
+                newDiv.appendTo('#recommendation');
+                movieTitle.push(title);
+                movieSynopsis.push(overview);
             }
+           
+            $('.carousel').carousel();
         }
+
+        console.log(movieQueryURL);
+        $(document.body).on("click", "#movie-1", function() {
+            $("#recommendation").empty();
+            console.log("butt1");
+            // Hook into contentDiv
+            // Adds title and overview to DOM 
+            $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + overview + "</p>")
+        });
+        $(document.body).on("click", "#movie-2", function() {
+            $("#recommendation").empty();
+            console.log("butt1");
+            // Hook into contentDiv
+            // Adds title and overview to DOM 
+            $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + overview + "</p>")
+        });
+        $(document.body).on("click", "#movie-3", function() {
+            $("#recommendation").empty();
+            console.log("butt1");
+            // Hook into contentDiv
+            // Adds title and overview to DOM 
+            $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + overview + "</p>")
+        });
+        resetGlobals();
+
+
     });
+    
+    
 }
 
-// Create global variables, as needed, for example...
-//Movie Database API Key and Query URL's
-// Search Term Query Variables 
-// 1. Present User with choices
-// AND
-// 2. Store Usesr's choices in Firebase (add more choices as needed)
-// Create on-click event to "Start App"
-// Create on-click event to submit 1st choice (How much time does the user have?)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase    
-// Create on-click event to submit 2nd choice (...)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase
-// Create on-click event to submit 3rd choice (...)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase
-// Create on-click event to submit 3rd choice (...)
-// Assign data value from user chocie to a query parameter for API
-// Push user choice to Firebase
-// 3. Retrieve User's choices from Firebase
-// AND
-// 4. Send API query based on User's choices
-// Get user choices from Firebase
-// Concatenate query parameters to API query
-//AJAX Query Call
-// 5. Return results from API query to display in the DOM
-// Hook into contentDiv
-// Use jQuery to create DOM elements for API query results 
-// <img> tag for poster
-// <h> or <p> tag(s) for title, synopsis, etc.
+
+
+function resetGlobals() {
+    userRating = '',
+    userGenre = '',
+    tvQueryURL = '',
+    movieQueryURL = '';
+  
+
+}
