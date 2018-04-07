@@ -37,9 +37,8 @@ body {
     height: 520px;
     padding: 0px 40px 10px 40px;
     overflow: scroll;
-
-
 }
+
 button {
     margin: 10px !important;
 }
@@ -114,11 +113,11 @@ border-right: 15px #557891 solid;
 
 /* Footer Coding  */
 
+
 .page-footer {
     margin-top: 10px;
     background-color: #556491 !important;
     border-top: 5px #000 solid !important;
-    position: absolute;
     width: 100%;
 }
 .footer-copyright {
