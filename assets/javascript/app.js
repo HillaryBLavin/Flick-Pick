@@ -102,8 +102,6 @@ function tvRatingsChoice() {
     }
 }
 
-// ------------------------ TV SECTION NOT FULLY FUNCTIONAL ---------------------------\\
-// ------------ NEEDS CAROUSEL AND FINAL RECOMMENDATION ON-CLICK FUNCTIONS ------------\\
 // Create on-click event for when user selets a rating
 $(document.body).on("click", "#tv-rating-choice", function() {
     userRating = $(this).data("value");
@@ -184,18 +182,39 @@ function tvQuery() {
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[0] + "</h4><p>" + tvSynopsis[0] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?kind=tv-show&term=" + tvTitle[0], function (result) {
+                console.log(result.results[0].previewUrl);
+                var videoUrl = result.results[0].previewUrl;
+                videoDiv = $('<video class="responsive-video" controls></video>');
+                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                videoDiv.appendTo("#recommendation");
+            });
         });
         $(document.body).on("click", "#tvshow-2", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[1] + "</h4><p>" + tvSynopsis[1] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?kind=tv-show&term=" + tvTitle[1], function (result) {
+                console.log(result.results[1].previewUrl);
+                var videoUrl = result.results[0].previewUrl;
+                videoDiv = $('<video class="responsive-video" controls></video>');
+                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                videoDiv.appendTo("#recommendation");
+            });
         });
         $(document.body).on("click", "#tvshow-3", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[2] + "</h4><p>" + tvSynopsis[2] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?kind=tv-show&term=" + tvTitle[2], function (result) {
+                console.log(result.results[2].previewUrl);
+                var videoUrl = result.results[0].previewUrl;
+                videoDiv = $('<video class="responsive-video" controls></video>');
+                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                videoDiv.appendTo("#recommendation");
+            });
         });
     
         resetGlobals();
@@ -304,18 +323,41 @@ function movieQuery() {
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + movieSynopsis[0] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?kind=feature-movie&term=" + movieTitle[0], function (result) {
+                console.log(result);
+                var videoUrl = result.results[0].previewUrl;
+                videoDiv = $('<video class="responsive-video" controls></video>');
+                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                videoDiv.appendTo("#recommendation");
+            });
+            
         });
         $(document.body).on("click", "#movie-2", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + movieSynopsis[1] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?kind=feature-movie&term=" + movieTitle[1], function (result) {
+                console.log(result);
+                var videoUrl = result.results[0].previewUrl;
+                videoDiv = $('<video class="responsive-video" controls></video>');
+                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                videoDiv.appendTo("#recommendation");
+            });
         });
         $(document.body).on("click", "#movie-3", function() {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + movieSynopsis[2] + "</p>");
+            $.getJSON("https://itunes.apple.com/search?kind=feature-movie&term=" + movieTitle[2], function (result) {
+                console.log(result.results[0].previewUrl);
+                var videoUrl = result.results[0].previewUrl;
+                    videoDiv = $('<video class="responsive-video" controls></video>');
+                    videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                    videoDiv.appendTo("#recommendation");
+
+            })
         });
         resetGlobals();
 
