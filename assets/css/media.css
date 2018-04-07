@@ -1,30 +1,90 @@
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 320px) {
     .television {
-        background-image:url() !important;
-        margin-top: -20px;
-        border: 10px #222 solid;
+        background-image:url();
+        margin-top: -10px;
+        width:400px;
+        height: 100%;
+        background-color: #fff;
+        border: 10px black solid;
+        
     }
+    .contentDiv {
+        height: 450px;
+        padding: 0px;
+        overflow: scroll;
+    }
+    .innerTV {
+        position: relative;
+        margin: 10px 20px;
+        overflow: none;
+    
+    }
+    .flick {
+        font-size: 45px;
+
+    }
+    
     h1 {
-        font-size: 60px !important;
+        font-size: 45px;
     }
+    
+    h2 {
+        font-size: 15px;
+
+    }
+    
+    h3 {
+        font-size: 25px;
+    }
+    
+    h4 {
+        font-size: 20px;
+    }
+    
+    h5 {
+        font-size: 20px;
+        padding: 5px 0px 0px 0px;
+    }
+    
     .material-icons {
-        font-size: 60px;
+        font-size: 35px;
     }
     .header {
         background-color: #000;
         height: 120px;
+        padding-top: 20px;
+        width: 100%;
     }
+
+    .opt {
+        transition: transform .2s;
+        width: 120px;
+        height: 150px;
+        margin: 10px 10px;
+    }
+    
+    .opt:hover {
+        -webkit-filter: brightness(1.05) contrast(1.05);
+                filter: brightness(1.05) contrast(1.05);
+        -webkit-transform: scale(0.95);
+                transform: scale(0.95);
+    }
+    
+    .movieRating {
+        padding: 0px;
+        background-color: rgb(255, 255, 255, .0);
+        transition: transform .2s;
+        background-color: #fff;
+        margin: 10px;
+        height: 150px;   
+    }
+    
+    .movieRating:hover {
+        -webkit-transform: scale(0.95);
+                transform: scale(0.95);
+    }
+
+
 } 
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {} 
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {} 
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {} 
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
