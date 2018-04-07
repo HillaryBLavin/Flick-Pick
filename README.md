@@ -1,6 +1,7 @@
 # Flick-Pick
 This web-based application will help indecisive users narrow down the endless viewing choices available on popular streaming platforms such as Netflix, Hulu, Amazon Prime, and more! Through the use of search APIs, the user will receive recommendations on what to watch based on their desired content type, rating, and genre. 
 
+See the site live [here](https://hillaryblavin.github.io/Flick-Pick/)!
 ### Technologies Used:
 * [jQuery Library](http://jquery.com/)
 * [Materialize CSS Framework](http://materializecss.com/about.html) 
