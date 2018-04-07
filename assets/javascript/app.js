@@ -62,6 +62,8 @@
     movieSynopsis = [],
     tvSynopsis = [];
 
+// This resets the start over button
+$('#startOverBtn').hide();
 
 // 1. Present user with choices
 // Start Button on-click event - starts the app
@@ -74,6 +76,7 @@ $('#startBtn').on('click', function () {
 
 // chooseScreen function - displays the initial choice for the user (TV vs Movie)
 function chooseScreen() {
+    
     // Display initial question
     $("#question").html("<h5>" + screenTypeOption.question + "</h5>");
     // Display choices using for-loop
@@ -90,6 +93,7 @@ $(document.body).on("click", "#choice1", function() {
     // Empty the contents of the question and answer list divs
     $("#question").empty();
     $("#answerList").empty();
+    $("#startOverBtn").empty();
     tvRatingsChoice();
 })
 // Define tvRatingsChoice - this will display TV Show Ratings options
@@ -377,6 +381,8 @@ function resetGlobals() {
     userGenre = '',
     tvQueryURL = '',
     movieQueryURL = '';
+    
+
   
 }
 
@@ -385,7 +391,7 @@ $('#startOverBtn').on('click', function(){
     // After clicking start over, the button hides and...
     $(this).hide();
     // New game function begins
-	newGame();
+    window.location.reload()
 });
 
 // function calliTunesTV() {
