@@ -75,7 +75,7 @@ $('#startBtn').on('click', function () {
 // chooseScreen function - displays the initial choice for the user (TV vs Movie)
 function chooseScreen() {
     // Display initial question
-    $("#question").html("<h4>" + screenTypeOption.question + "</h4>");
+    $("#question").html("<h5>" + screenTypeOption.question + "</h5>");
     // Display choices using for-loop
     for (i = 0; i < screenTypeOption.options.length; i++) {
         $("#answerList").append("<class='firstChoice' id='choice" + (i+1) + "'>" + screenTypeOption.options[i] + "</>");
@@ -95,7 +95,7 @@ $(document.body).on("click", "#choice1", function() {
 // Define tvRatingsChoice - this will display TV Show Ratings options
 function tvRatingsChoice() {
     // Display first question in tvQuestions
-    $("#question").html("<h4>" + tvQuestions[0].question + "</h4>");
+    $("#question").html("<h5>" + tvQuestions[0].question + "</h5>");
     // Display choices using for-loop
     for (i = 0; i < tvQuestions[0].valuesID.length; i++) {
         $("#answerList").append("<button class='buttonRating' id='tv-rating-choice' title='" + tvQuestions[0].options[i] + "' data-value='" + tvQuestions[0].valuesID[i] + "'>" + tvQuestions[0].valuesID[i] + "</button>");
@@ -115,7 +115,7 @@ $(document.body).on("click", "#tv-rating-choice", function() {
 // Define tvGenreChoice - this will display TV Show genre options
 function tvGenreChoice() {
     // Display second question in tvQuestions
-    $("#question").html("<h4>" + tvQuestions[1].question + "</h4>");
+    $("#question").html("<h5>" + tvQuestions[1].question + "</h5>");
     // Display choices using for-loop
     for (i = 0; i < tvQuestions[1].options.length; i++) {
         $("#answerList").append("<button class='waves-effect waves-light btn-large' id='tv-genre-choice' data-value='" + tvQuestions[1].valuesID[i] + "'>" + tvQuestions[1].options[i] + "</button>");
@@ -142,7 +142,7 @@ function tvQuery() {
         if (response.results.length > 0) {
             // Create a new div
             finalRecDiv = $("<div>"); // Create a new div
-            finalRecDiv.html("<h4>How about one of these?</h4>"); // Add text
+            finalRecDiv.html("<h5>How about one of these?</h5>"); // Add text
             clickPoster = $("<div>"); // Create a new div
             clickPoster.html("<p>Click the poster for more info!</p>"); // Add text
             newDiv = $("<div>");
@@ -217,7 +217,7 @@ $(document.body).on("click", "#choice2", function() {
 // Define movieRatingsChoice - this will display Movie Ratings options
 function movieRatingsChoice() {
     // Display first question in movieQuestions
-    $("#question").html("<h4>" + movieQuestions[0].question + "</h4>");
+    $("#question").html("<h5>" + movieQuestions[0].question + "</h5>");
     // Display choices using for-loop
     for (i = 0; i < movieQuestions[0].options.length; i++) {
         $("#answerList").append("<button class='waves-effect waves-light btn-large' id='movie-rating-choice' data-value='" + movieQuestions[0].valuesID[i] + "'>" + movieQuestions[0].options[i] + "</button>");
@@ -234,7 +234,7 @@ $(document.body).on("click", "#movie-rating-choice", function() {
 // Define movieGenreChoice - this will display Movie genre options
 function movieGenreChoice() {
     // Display second question in movieQuestions
-    $("#question").html("<h4>" + movieQuestions[1].question + "</h4>");
+    $("#question").html("<h5>" + movieQuestions[1].question + "</h5>");
     // Display choices using for-loop
     for (i = 0; i < movieQuestions[1].options.length; i++) {
         $("#answerList").append("<button class='waves-effect waves-light btn-large' id='movie-genre-choice' data-value='" + movieQuestions[1].valuesID[i] + "'>" + movieQuestions[1].options[i] + "</button>");
@@ -261,7 +261,7 @@ function movieQuery() {
         console.log(response);
         // Insert code for writing the results to the DOM here
         finalRecDiv = $("<div>"); // Create a new div
-        finalRecDiv.html("<h4>How about one of these?</h4>"); // Add text
+        finalRecDiv.html("<h5>How about one of these?</h5>"); // Add text
         clickPoster = $("<div>"); // Create a new div
         clickPoster.html("<p>Click the poster for more info!</p>"); // Add text
         if (response.results.length > 0) {
