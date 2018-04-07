@@ -220,8 +220,11 @@ function tvQuery() {
                 videoDiv.appendTo("#recommendation");
             });
         });
-    
+        $('#startOverBtn').addClass('reset');
+        $('#startOverBtn').show();
+        $('#startOverBtn').html('Start Over?');
         resetGlobals();
+        
 
 
     });
