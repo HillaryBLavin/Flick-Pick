@@ -22,7 +22,7 @@ body {
     background-image:url("../images/TV.png");
     width:100%;
     max-width: 100%;
-    height: auto;
+    height: 640px !important;
     margin-top: -40px;
     background-size:cover;
     overflow: none;
@@ -43,21 +43,32 @@ body {
 button {
     margin: 10px !important;
 }
+
+.carousel.carousel-slider {
+    top: -20px;
+}
+.carousel {
+    height: 430px !important;
+}
 .carousel-item {
-width: 250px !important;
+width: 280px !important;
 height: 300px !important;
-min-height: 380px !important;
+
+border-top: 15px #ccc solid;
+border-bottom: 15px #aaa solid;
+border-left: 15px #556491 solid;
+border-right: 15px #557891 solid;
 }
 
 /* Image coding for Movie/TV Choice */
 
 .opt {
-    padding: 10px;
+    padding: 0px;
     background-color: rgb(255, 255, 255, .0);
     transition: transform .2s; /* Animation */
     width: 200px;
     height: 232px;
-    margin: 0 auto;
+    margin: 50px 50px;
 }
 
 .opt:hover {
@@ -94,6 +105,9 @@ min-height: 380px !important;
     margin-top: 10px;
     background-color: #556491 !important;
     border-top: 5px #000 solid !important;
+    position: absolute;
+    width: 100%;
+    bottom: 0px !important;
 }
 .footer-copyright {
     background-color: #111 !important;
@@ -151,6 +165,13 @@ h3 {
 
 h4 {
     font-size: 1.28rem;
+}
+
+h5 {
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 4px #556491 solid;
+    font-size: 2.2rem;
+    padding: 5px 15px 0px 15px;
 }
 
 .material-icons {
