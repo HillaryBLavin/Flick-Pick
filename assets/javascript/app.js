@@ -60,7 +60,8 @@ tvQueryURL = '',
     movieSynopsis = [],
     tvSynopsis = [];
 
-
+    $('#startOverBtn').hide();
+    
 // 1. Present user with choices
 // Start Button on-click event - starts the app
 $('#startBtn').on('click', function () {
