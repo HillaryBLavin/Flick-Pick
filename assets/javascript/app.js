@@ -10,7 +10,7 @@
     // screenTypeOption - an object that holds the intial question and two possible answers
     var screenTypeOption = {
         question: "Do you want to watch a TV Show or a Movie?",
-        options: ['<img src="assets/images/TVshow.png" class="opt" alt="TV Show"', '<img src="assets/images/MOVie.png" class="opt" alt="Movie">']
+        options: ['<img src="assets/images/TVshow.png" class="opt" alt="TV Show">', '<img src="assets/images/MOVie.png" class="opt" alt="Movie">']
     },
     // tvQuestions - an array that holds the tv questions and their possible answers
     tvQuestions = [
@@ -29,7 +29,7 @@
     movieQuestions = [
         { // Movie Ratings Choices
             question: "Who's watching? Pick a rating!", // What is the rating you want?
-            options: ['G: For all ages.', 'NC-17: Parents would consider too strong for viewing by their children and teens.', 'NR: No rating information.', 'PG: Some material may not be suitable for children under 10.', 'PG-13: Some material may be inappropriate for children under 13. ', 'R: If under 17, requires accompanying parent or adult guardian 21 or older.'],
+            options: ['<img src="assets/images/ratedG.png" class="movieRating">', '<img src="assets/images/ratingNC-17.png" class="movieRating">', '<img src="assets/images/NoRating.png" class="movieRating">', '<img src="assets/images/RatedPG.png" class="movieRating">', '<img src="assets/images/RatedPG-13.png" class="movieRating">', '<img src="assets/images/RatedR.png" class="movieRating">'],
             valuesID: ['G', 'NC-17', 'NR', 'PG', 'PG-13', 'R']
         },
         { // Movie Genres
@@ -239,7 +239,7 @@ function movieRatingsChoice() {
     $("#question").html("<h5>" + movieQuestions[0].question + "</h5>");
     // Display choices using for-loop
     for (i = 0; i < movieQuestions[0].options.length; i++) {
-        $("#answerList").append("<button class='waves-effect waves-light btn-large' id='movie-rating-choice' data-value='" + movieQuestions[0].valuesID[i] + "'>" + movieQuestions[0].options[i] + "</button>");
+        $("#answerList").append("<class='movieRating' id='movie-rating-choice' data-value='" + movieQuestions[0].valuesID[i] + "'>" + movieQuestions[0].options[i] + "</>");
     }
 }
 // Create on-click event for when user selets a rating
@@ -356,9 +356,12 @@ function movieQuery() {
                     videoDiv = $('<video class="responsive-video" controls></video>');
                     videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
                     videoDiv.appendTo("#recommendation");
-
+ 
             })
-        });
+        });	
+        $('#startOverBtn').addClass('reset');
+        $('#startOverBtn').show();
+        $('#startOverBtn').html('Start Over?');
         resetGlobals();
 
 
@@ -375,9 +378,15 @@ function resetGlobals() {
     tvQueryURL = '',
     movieQueryURL = '';
   
-
 }
 
+// Start Over Button
+$('#startOverBtn').on('click', function(){
+    // After clicking start over, the button hides and...
+    $(this).hide();
+    // New game function begins
+	newGame();
+});
 
 // function calliTunesTV() {
 //     $.getJSON("https://itunes.apple.com/search?term=" + tvTitle[i], function (result) {
