@@ -1,20 +1,19 @@
 // Flick-Pick JavaScript Basic Logic
-    // 1. Present user with choices
-    // 2. Send API query based on user's choices
-    // 3. Return results from API query to display in the DOM
+// 1. Present user with choices
+// 2. Send API query based on user's choices
+// 3. Return results from API query to display in the DOM
 
 //---------- WELCOME TO FLICK PICK! ---------------\\
 
 // Create global variables and objects
 
-    // screenTypeOption - an object that holds the intial question and two possible answers
-    var screenTypeOption = {
+// screenTypeOption - an object that holds the intial question and two possible answers
+var screenTypeOption = {
         question: "Do you want to watch a TV Show or a Movie?",
         options: ['<img src="assets/images/TVshow.png" class="opt" alt="TV Show">', '<img src="assets/images/MOVie.png" class="opt" alt="Movie">']
     },
     // tvQuestions - an array that holds the tv questions and their possible answers
-    tvQuestions = [
-        { // TV Ratings Choices
+    tvQuestions = [{ // TV Ratings Choices
             question: "Who's watching? Pick a rating!", // What is the rating you want?
             options: ['Programs designed to be appropriate for all children.', 'Programs designed for children ages 7 and above.', 'Program most parents would find suitable for all ages.', 'Programs containing materials that parents may find unsuitable for younger children.', 'Programs containing some material is unsuitable for children under 14 years of age.', 'Programs specifically designed to be viewed by adults and unsuitable for children under 17.'],
             valuesID: ['TV-Y', 'TV-Y7', 'TV-G', 'TV-PG', 'TV-14', 'TV-MA']
@@ -26,8 +25,7 @@
         }
     ],
     // movieQuestions - an array that holds the movie questions and their possible answers
-    movieQuestions = [
-        { // Movie Ratings Choices
+    movieQuestions = [{ // Movie Ratings Choices
             question: "Who's watching? Pick a rating!", // What is the rating you want?
             options: ['<img src="assets/images/ratedG.png" class="movieRating">', '<img src="assets/images/ratingNC-17.png" class="movieRating">', '<img src="assets/images/NoRating.png" class="movieRating">', '<img src="assets/images/RatedPG.png" class="movieRating">', '<img src="assets/images/RatedPG-13.png" class="movieRating">', '<img src="assets/images/RatedR.png" class="movieRating">'],
             valuesID: ['G', 'NC-17', 'NR', 'PG', 'PG-13', 'R']
@@ -39,8 +37,8 @@
         }
     ];
 
-    // Initialize global variables for the user's choice of rating and genre, to be used later for API query
-    userRating = '',
+// Initialize global variables for the user's choice of rating and genre, to be used later for API query
+userRating = '',
     userGenre = '',
     // Variables for the rest of the query parameters
     apiKey = "?api_key=2429acb131d788573608b3142e21e670", //key provided by The Movie Databse API
@@ -52,10 +50,10 @@
 
     // testURL for quick debugging //
     testURL = 'https://api.themoviedb.org/3/discover/movie?api_key=2429acb131d788573608b3142e21e670&language=en-US&sort_by=popularity.asc&certification_country=US&certification=R&include_video=false&with_genres=28'
-    //----------------------------------//
-    
-    // Empty global variables to be defined based on user choices and used for API queries
-    tvQueryURL = '',
+//----------------------------------//
+
+// Empty global variables to be defined based on user choices and used for API queries
+tvQueryURL = '',
     movieQueryURL = '',
     movieTitle = [],
     tvTitle = [],
@@ -76,12 +74,12 @@ $('#startBtn').on('click', function () {
 
 // chooseScreen function - displays the initial choice for the user (TV vs Movie)
 function chooseScreen() {
-    
+
     // Display initial question
     $("#question").html("<h5>" + screenTypeOption.question + "</h5>");
     // Display choices using for-loop
     for (i = 0; i < screenTypeOption.options.length; i++) {
-        $("#answerList").append("<class='firstChoice' id='choice" + (i+1) + "'>" + screenTypeOption.options[i] + "</>");
+        $("#answerList").append("<class='firstChoice' id='choice" + (i + 1) + "'>" + screenTypeOption.options[i] + "</>");
     }
 }
 
@@ -89,7 +87,7 @@ function chooseScreen() {
 
 // TV LOGIC
 // On-click event for "TV Show"
-$(document.body).on("click", "#choice1", function() {
+$(document.body).on("click", "#choice1", function () {
     // Empty the contents of the question and answer list divs
     $("#question").empty();
     $("#answerList").empty();
@@ -107,7 +105,7 @@ function tvRatingsChoice() {
 }
 
 // Create on-click event for when user selets a rating
-$(document.body).on("click", "#tv-rating-choice", function() {
+$(document.body).on("click", "#tv-rating-choice", function () {
     userRating = $(this).data("value");
     console.log(userRating);
     $("#question").empty();
@@ -124,7 +122,7 @@ function tvGenreChoice() {
     }
 }
 // Create on-click event for when user selets a genre
-$(document.body).on("click", "#tv-genre-choice", function() {
+$(document.body).on("click", "#tv-genre-choice", function () {
     userGenre = $(this).data("value");
     console.log(userGenre);
     $("#question").empty();
@@ -161,7 +159,7 @@ function tvQuery() {
                 // Add .carousel-item (per Materialize Carousel documentation)
                 img.attr("class", 'carousel-item');
                 // Add id for use in on-click event 
-                img.attr("id", "tvshow-" + (i+1));
+                img.attr("id", "tvshow-" + (i + 1));
                 // Add data-value for title
                 img.data("title", title);
                 //Add data-value for overview
@@ -181,60 +179,66 @@ function tvQuery() {
         }
 
         console.log(tvQueryURL);
-        $(document.body).on("click", "#tvshow-1", function() {
+        $(document.body).on("click", "#tvshow-1", function () {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[0] + "</h4><p>" + tvSynopsis[0] + "</p>");
             $.getJSON("https://itunes.apple.com/search?kind=tv-show&term=" + tvTitle[0], function (result) {
                 console.log(result.results[0].previewUrl);
-                var videoUrl = result.results[0].previewUrl;
-                videoDiv = $('<video class="responsive-video" controls></video>');
-                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
-                videoDiv.appendTo("#recommendation");
+                if (result.results[i].kind === "tv-episodes") {
+                    var videoUrl = result.results[0].previewUrl;
+                    videoDiv = $('<video class="responsive-video" controls></video>');
+                    videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                    videoDiv.appendTo("#recommendation");
+                }
             });
         });
-        $(document.body).on("click", "#tvshow-2", function() {
+        $(document.body).on("click", "#tvshow-2", function () {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[1] + "</h4><p>" + tvSynopsis[1] + "</p>");
             $.getJSON("https://itunes.apple.com/search?kind=tv-show&term=" + tvTitle[1], function (result) {
                 console.log(result.results[1].previewUrl);
-                var videoUrl = result.results[0].previewUrl;
-                videoDiv = $('<video class="responsive-video" controls></video>');
-                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
-                videoDiv.appendTo("#recommendation");
+                if (result.results[i].kind === "tv-episodes") {
+                    var videoUrl = result.results[0].previewUrl;
+                    videoDiv = $('<video class="responsive-video" controls></video>');
+                    videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                    videoDiv.appendTo("#recommendation");
+                }
             });
         });
-        $(document.body).on("click", "#tvshow-3", function() {
+        $(document.body).on("click", "#tvshow-3", function () {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + tvTitle[2] + "</h4><p>" + tvSynopsis[2] + "</p>");
             $.getJSON("https://itunes.apple.com/search?kind=tv-show&term=" + tvTitle[2], function (result) {
                 console.log(result.results[2].previewUrl);
-                var videoUrl = result.results[0].previewUrl;
-                videoDiv = $('<video class="responsive-video" controls></video>');
-                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
-                videoDiv.appendTo("#recommendation");
+                if (result.results[i].kind === "tv-episodes") {
+                    var videoUrl = result.results[0].previewUrl;
+                    videoDiv = $('<video class="responsive-video" controls></video>');
+                    videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                    videoDiv.appendTo("#recommendation");
+                }
             });
         });
         $('#startOverBtn').addClass('reset');
         $('#startOverBtn').show();
         $('#startOverBtn').html('Start Over?');
         resetGlobals();
-        
+
 
 
     });
-    
-    
+
+
 }
 
 // MOVIE LOGIC
 // On-click even for "Movie"
-$(document.body).on("click", "#choice2", function() {
+$(document.body).on("click", "#choice2", function () {
     // Empty the contents of the question and answer list divs
     $("#question").empty();
     $("#answerList").empty();
@@ -250,7 +254,7 @@ function movieRatingsChoice() {
     }
 }
 // Create on-click event for when user selets a rating
-$(document.body).on("click", "#movie-rating-choice", function() {
+$(document.body).on("click", "#movie-rating-choice", function () {
     userRating = $(this).data("value");
     console.log(userRating);
     $("#question").empty();
@@ -267,7 +271,7 @@ function movieGenreChoice() {
     }
 }
 // Create on-click event for when user selets a genre
-$(document.body).on("click", "#movie-genre-choice", function() {
+$(document.body).on("click", "#movie-genre-choice", function () {
     userGenre = $(this).data("value");
     console.log(userGenre);
     $("#question").empty();
@@ -306,7 +310,7 @@ function movieQuery() {
                 // Add .carousel-item (per Materialize Carousel documentation)
                 img.attr("class", 'carousel-item');
                 // Add id for use in on-click event 
-                img.attr("id", "movie-" + (i+1));
+                img.attr("id", "movie-" + (i + 1));
                 // Add data-value for title
                 img.data("title", title);
                 //Add data-value for overview
@@ -325,47 +329,52 @@ function movieQuery() {
             $('.carousel').carousel();
         }
 
-        $(document.body).on("click", "#movie-1", function() {
+        $(document.body).on("click", "#movie-1", function () {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[0] + "</h4><p>" + movieSynopsis[0] + "</p>");
             $.getJSON("https://itunes.apple.com/search?kind=feature-movie&term=" + movieTitle[0], function (result) {
                 console.log(result);
-                var videoUrl = result.results[0].previewUrl;
-                videoDiv = $('<video class="responsive-video" controls></video>');
-                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
-                videoDiv.appendTo("#recommendation");
+                if (result.results[i].kind === "feature-movie") {
+                    var videoUrl = result.results[0].previewUrl;
+                    videoDiv = $('<video class="responsive-video" controls></video>');
+                    videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                    videoDiv.appendTo("#recommendation");
+                }
             });
-            
+
         });
-        $(document.body).on("click", "#movie-2", function() {
+        $(document.body).on("click", "#movie-2", function () {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[1] + "</h4><p>" + movieSynopsis[1] + "</p>");
             $.getJSON("https://itunes.apple.com/search?kind=feature-movie&term=" + movieTitle[1], function (result) {
                 console.log(result);
-                var videoUrl = result.results[0].previewUrl;
-                videoDiv = $('<video class="responsive-video" controls></video>');
-                videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
-                videoDiv.appendTo("#recommendation");
+                if (result.results[i].kind === "feature-movie") {
+                    var videoUrl = result.results[0].previewUrl;
+                    videoDiv = $('<video class="responsive-video" controls></video>');
+                    videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
+                    videoDiv.appendTo("#recommendation");
+                }
             });
         });
-        $(document.body).on("click", "#movie-3", function() {
+        $(document.body).on("click", "#movie-3", function () {
             $("#recommendation").empty();
             // Hook into contentDiv
             // Adds title and overview to DOM 
             $("#recommendation").html("<h4>" + movieTitle[2] + "</h4><p>" + movieSynopsis[2] + "</p>");
             $.getJSON("https://itunes.apple.com/search?kind=feature-movie&term=" + movieTitle[2], function (result) {
                 console.log(result.results[0].previewUrl);
-                var videoUrl = result.results[0].previewUrl;
+                if (result.results[i].kind === "feature-movie") {
+                    var videoUrl = result.results[0].previewUrl;
                     videoDiv = $('<video class="responsive-video" controls></video>');
                     videoDiv.html("<source src='" + videoUrl + "' type='video/mp4'>");
                     videoDiv.appendTo("#recommendation");
- 
+                }
             })
-        });	
+        });
         $('#startOverBtn').addClass('reset');
         $('#startOverBtn').show();
         $('#startOverBtn').html('Start Over?');
@@ -373,24 +382,24 @@ function movieQuery() {
 
 
     });
-    
-    
+
+
 }
 
 
 // Reset global variables
 function resetGlobals() {
     userRating = '',
-    userGenre = '',
-    tvQueryURL = '',
-    movieQueryURL = '';
-    
+        userGenre = '',
+        tvQueryURL = '',
+        movieQueryURL = '';
 
-  
+
+
 }
 
 // Start Over Button
-$('#startOverBtn').on('click', function(){
+$('#startOverBtn').on('click', function () {
     // After clicking start over, the button hides and...
     $(this).hide();
     // New game function begins
